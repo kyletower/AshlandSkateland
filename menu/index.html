@@ -1,0 +1,599 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ashland Skateland Snack Bar | Menu</title>
+
+    <style>
+      :root {
+        --bg-black-magic: #1b1b1b;
+        --card-bg: #262626;
+        --text-main: #f0f0f0;
+        --text-muted: #aaaaaa;
+        --neon-pink: #d6336c;
+        --neon-cyan: #3ff0ff;
+        --border-color: #333333;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        background-color: var(--bg-black-magic);
+        color: var(--text-main);
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+          Arial, sans-serif;
+        line-height: 1.4;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        overflow-x: hidden;
+      }
+
+      header {
+        text-align: center;
+        padding: 1.5rem 1rem;
+        background-color: rgba(27, 27, 27, 0.95);
+        border-bottom: 3px solid var(--neon-pink);
+        box-shadow: 0 4px 15px rgba(214, 51, 108, 0.2);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+      }
+
+      .brand {
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+          Arial, sans-serif;
+        font-weight: 900;
+        text-transform: uppercase;
+        letter-spacing: 0.03em;
+        color: var(--text-main);
+        text-shadow:
+          0 0 6px var(--neon-cyan),
+          0 0 16px var(--neon-pink);
+      }
+      .menu-logo {
+        font-size: clamp(1.5rem, 6vw, 2.5rem);
+      }
+
+      .subtitle {
+        font-size: 1.8vw;
+        color: var(--neon-pink);
+        text-transform: uppercase;
+        letter-spacing: 4px;
+        margin-top: 0.5rem;
+      }
+
+      @media (max-width: 768px) {
+        .subtitle {
+          font-size: 1.2rem;
+        }
+      }
+
+      .back-nav {
+        margin-top: 0.75rem;
+        display: flex;
+        justify-content: center;
+        gap: 1.25rem;
+      }
+      .back-nav a {
+        color: var(--neon-cyan);
+        text-decoration: none;
+        font-size: 0.9rem;
+        font-weight: 600;
+      }
+      .back-nav a:hover {
+        text-decoration: underline;
+      }
+
+      .menu-container {
+        flex: 1;
+        width: 100%;
+        max-width: 1800px;
+        margin: 0 auto;
+        padding: 2rem;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+      }
+
+      @media (min-width: 1024px) {
+        .menu-container {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
+
+      .category-card {
+        background-color: var(--card-bg);
+        border-radius: 12px;
+        padding: 2rem;
+        border: 1px solid var(--border-color);
+        box-shadow:
+          inset 0 0 20px rgba(0, 0, 0, 0.5),
+          0 8px 16px rgba(0, 0, 0, 0.3);
+        display: flex;
+        flex-direction: column;
+      }
+
+      .legend-card {
+        grid-column: 1 / -1;
+        text-align: center;
+      }
+
+      .legend-icons {
+        display: flex;
+        justify-content: center;
+        gap: 1.5rem;
+        flex-wrap: wrap;
+        font-size: 1.2rem;
+        margin-top: 1rem;
+      }
+
+      .category-header {
+        font-size: 2.5rem;
+        color: var(--neon-pink);
+        text-transform: uppercase;
+        text-align: center;
+        margin-bottom: 1.5rem;
+        padding-bottom: 1rem;
+        border-bottom: 2px solid var(--neon-cyan);
+        text-shadow: 0 0 8px rgba(214, 51, 108, 0.4);
+      }
+
+      .sub-category {
+        font-size: 1.4rem;
+        color: var(--neon-cyan);
+        text-transform: uppercase;
+        margin: 1.5rem 0 1rem;
+        letter-spacing: 1px;
+        text-shadow: 0 0 5px rgba(63, 240, 255, 0.3);
+      }
+
+      .category-card > .sub-category:first-of-type {
+        margin-top: 0;
+      }
+
+      .menu-list {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 1.2rem; /* Increased gap slightly to accommodate multi-price items */
+      }
+
+      .menu-item {
+        display: flex;
+        align-items: baseline;
+        font-size: 1.3rem;
+        font-weight: 500;
+        flex-wrap: wrap; /* Allow wrapping for complex items */
+      }
+
+      @media (min-width: 1400px) {
+        .menu-item {
+          font-size: 1.5rem;
+        }
+      }
+
+      .item-name {
+        color: var(--text-main);
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+
+      .item-notes {
+        font-size: 0.85em;
+        color: var(--text-muted);
+        margin-left: 0.5rem;
+        font-weight: normal;
+      }
+
+      .allergen-icon {
+        font-size: 1rem;
+        margin-left: 0.5rem;
+        opacity: 0.9;
+      }
+
+      .leader {
+        flex-grow: 1;
+        border-bottom: 2px dotted var(--border-color);
+        margin: 0 12px;
+        opacity: 0.7;
+        min-width: 20px;
+      }
+
+      .price-group {
+        display: flex;
+        gap: 1rem;
+        align-items: baseline;
+        justify-content: flex-end;
+      }
+
+      .price-option {
+        display: flex;
+        align-items: baseline;
+        gap: 0.3rem;
+      }
+
+      .price-label {
+        font-size: 0.85em;
+        color: var(--text-muted);
+        font-weight: normal;
+      }
+
+      .item-price {
+        color: var(--neon-cyan);
+        font-weight: 700;
+        text-shadow: 0 0 8px rgba(63, 240, 255, 0.3);
+      }
+
+      /* Specific styling for the complex flavor lists */
+      .flavor-list {
+        width: 100%;
+        font-size: 0.9em;
+        color: var(--text-muted);
+        margin-top: 0.3rem;
+        padding-left: 1rem;
+        font-weight: normal;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1 class="brand menu-logo">Ashland Skateland</h1>
+      <div class="subtitle">Snack Bar Menu</div>
+      <nav class="back-nav">
+        <a href="/">&larr; Home</a>
+        <a href="/calendar/">Calendar</a>
+      </nav>
+    </header>
+
+    <main class="menu-container">
+      <!-- Allergen Legend -->
+      <section class="category-card legend-card">
+        <h2 class="category-header">Allergen Guide</h2>
+        <p style="color: var(--text-muted)">
+          In compliance with Virginia Dept. of Health regulations, below are the
+          major food allergens present in our items.
+        </p>
+        <div class="legend-icons">
+          <span>🌾 Wheat</span>
+          <span>🥛 Milk</span>
+          <span>🥚 Egg</span>
+          <span>🌱 Soy</span>
+          <span>🥯 Sesame</span>
+          <span>🥜 Peanut</span>
+          <span>🌰 Tree Nuts</span>
+          <span>🐟 Fish</span>
+          <span>🦐 Shellfish</span>
+        </div>
+        <p
+          style="color: var(--text-muted); font-size: 0.9rem; margin-top: 1rem"
+        >
+          *We currently have no dishes containing fish, crustacean shellfish,
+          tree nuts, or sesame.
+        </p>
+      </section>
+
+      <section class="category-card">
+        <h2 class="category-header">Food</h2>
+        <ul class="menu-list">
+          <li class="menu-item">
+            <span class="item-name"
+              >Pizza <span class="item-notes">(Cheese/Pepperoni)</span
+              ><span class="allergen-icon" title="Contains Wheat, Milk, Soy"
+                >🌾 🥛 🌱</span
+              ></span
+            >
+            <span class="leader"></span>
+            <div class="price-group">
+              <span class="price-option"
+                ><span class="price-label">Slice</span>
+                <span class="item-price">$3.00</span></span
+              >
+              <span class="price-option"
+                ><span class="price-label">Whole</span>
+                <span class="item-price">$12.50</span></span
+              >
+            </div>
+          </li>
+
+          <li class="menu-item">
+            <span class="item-name"
+              >Jumbo Beef Hotdog<span
+                class="allergen-icon"
+                title="Contains Wheat, Soy"
+                >🌾 🌱</span
+              ></span
+            >
+            <span class="leader"></span>
+            <span class="item-price">$3.00</span>
+          </li>
+
+          <li class="menu-item">
+            <span class="item-name"
+              >Chicken Nuggets
+              <span class="item-notes">w/ Chick-fil-A Sauce</span
+              ><span class="allergen-icon" title="Contains Wheat, Soy, Egg"
+                >🌾 🌱 🥚</span
+              ></span
+            >
+            <span class="leader"></span>
+            <div class="price-group">
+              <span class="price-option"
+                ><span class="price-label">5-ct</span>
+                <span class="item-price">$5.25</span></span
+              >
+              <span class="price-option"
+                ><span class="price-label">8-ct</span>
+                <span class="item-price">$7.50</span></span
+              >
+              <span class="price-option"
+                ><span class="price-label">12-ct</span>
+                <span class="item-price">$11.00</span></span
+              >
+            </div>
+          </li>
+
+          <li class="menu-item">
+            <span class="item-name"
+              >Chicken Tender Strips
+              <span class="item-notes">w/ Chick-fil-A Sauce</span
+              ><span class="allergen-icon" title="Contains Wheat, Soy, Egg"
+                >🌾 🌱 🥚</span
+              ></span
+            >
+            <span class="leader"></span>
+            <div class="price-group">
+              <span class="price-option"
+                ><span class="price-label">2-ct</span>
+                <span class="item-price">$6.00</span></span
+              >
+              <span class="price-option"
+                ><span class="price-label">3-ct</span>
+                <span class="item-price">$8.50</span></span
+              >
+              <span class="price-option"
+                ><span class="price-label">4-ct</span>
+                <span class="item-price">$11.25</span></span
+              >
+              <span class="price-option"
+                ><span class="price-label">10-ct</span>
+                <span class="item-price">$26.00</span></span
+              >
+            </div>
+          </li>
+
+          <li class="menu-item">
+            <span class="item-name"
+              >Pretzel <span class="item-notes">(Plain, Salt, Cinnamon)</span
+              ><span class="allergen-icon" title="Contains Wheat"
+                >🌾</span
+              ></span
+            >
+            <span class="leader"></span>
+            <div class="price-group">
+              <span class="price-option"
+                ><span class="price-label">Med</span>
+                <span class="item-price">$3.00</span></span
+              >
+              <span class="price-option"
+                ><span class="price-label">Lrg</span>
+                <span class="item-price">$4.00</span></span
+              >
+            </div>
+          </li>
+
+          <li class="menu-item">
+            <span class="item-name"
+              >Popcorn<span class="allergen-icon" title="Contains Milk, Soy"
+                >🥛 🌱</span
+              ></span
+            >
+            <span class="leader"></span>
+            <div class="price-group">
+              <span class="price-option"
+                ><span class="price-label">Bag</span>
+                <span class="item-price">$1.50</span></span
+              >
+              <span class="price-option"
+                ><span class="price-label">Tub</span>
+                <span class="item-price">$3.00</span></span
+              >
+            </div>
+          </li>
+
+          <li class="menu-item">
+            <span class="item-name">Pickle</span>
+            <span class="leader"></span>
+            <span class="item-price">$1.25</span>
+          </li>
+
+          <li class="menu-item">
+            <span class="item-name"
+              >Pop-Tarts<span
+                class="allergen-icon"
+                title="Contains Wheat, Milk, Soy"
+                >🌾 🥛 🌱</span
+              ></span
+            >
+            <span class="leader"></span>
+            <span class="item-price">$3.50</span>
+            <div class="flavor-list">
+              Flavors: Frosted Strawberry, Frosted Blueberry, Cookies &amp;
+              Creme, Frosted Brown Sugar
+            </div>
+          </li>
+        </ul>
+      </section>
+
+      <section class="category-card">
+        <h2 class="category-header">Drinks</h2>
+
+        <h3 class="sub-category">Drinks</h3>
+        <ul class="menu-list">
+          <li class="menu-item">
+            <span class="item-name">Sodas</span>
+            <span class="leader"></span>
+            <span class="item-price">$2.50</span>
+            <div class="flavor-list">
+              A&amp;W Root Beer, Cherry Coke, Coke, Coke Zero, Diet Coke, Dr
+              Pepper, Fanta Orange, Mountain Dew Baja Blast, Sprite
+            </div>
+          </li>
+          <li class="menu-item">
+            <span class="item-name">Tea</span>
+            <span class="leader"></span>
+            <span class="item-price">$2.50</span>
+            <div class="flavor-list">
+              Sweet or Unsweetened
+            </div>
+          </li>
+          <li class="menu-item">
+            <span class="item-name">Capri Sun Fruit Punch</span
+            ><span class="leader"></span><span class="item-price">$2.50</span>
+          </li>
+        </ul>
+
+        <h3 class="sub-category">Sports & Energy</h3>
+        <ul class="menu-list">
+          <li class="menu-item">
+            <span class="item-name">Alani Energy</span>
+            <span class="leader"></span>
+            <span class="item-price">$3.50</span>
+            <div class="flavor-list">
+              Flavors: Cotton Candy, Sherbet Swirl, Strawberry Sunrise
+            </div>
+          </li>
+          <li class="menu-item">
+            <span class="item-name">Celsius Energy</span>
+            <span class="leader"></span>
+            <span class="item-price">$3.50</span>
+            <div class="flavor-list">
+              Flavors: Arctic Vibe, Peach Vibe, Tropical Vibe
+            </div>
+          </li>
+          <li class="menu-item">
+            <span class="item-name">Gatorade</span>
+            <span class="leader"></span>
+            <span class="item-price">$3.00</span>
+            <div class="flavor-list">Flavors: Cool Blue, Fruit Punch</div>
+          </li>
+          <li class="menu-item">
+            <span class="item-name">Monster Zero Ultra</span
+            ><span class="leader"></span><span class="item-price">$3.00</span>
+          </li>
+        </ul>
+
+        <h3 class="sub-category">Water</h3>
+        <ul class="menu-list">
+          <li class="menu-item">
+            <span class="item-name">Bottled Water</span
+            ><span class="leader"></span><span class="item-price">$2.00</span>
+          </li>
+        </ul>
+      </section>
+
+      <section class="category-card">
+        <h2 class="category-header">Ice Cream</h2>
+        <ul class="menu-list">
+          <li class="menu-item">
+            <span class="item-name">Bomb Pop</span>
+            <span class="leader"></span>
+            <span class="item-price">$3.50</span>
+          </li>
+          <li class="menu-item">
+            <span class="item-name"
+              >Chipwich Cookie Sandwich<span
+                class="allergen-icon"
+                title="Contains Wheat, Milk, Soy, Egg"
+                >🌾 🥛 🌱 🥚</span
+              ></span
+            >
+            <span class="leader"></span>
+            <span class="item-price">$5.25</span>
+          </li>
+          <li class="menu-item">
+            <span class="item-name"
+              >Chocolate Eclair<span
+                class="allergen-icon"
+                title="Contains Wheat, Milk, Soy"
+                >🌾 🥛 🌱</span
+              ></span
+            >
+            <span class="leader"></span>
+            <span class="item-price">$3.50</span>
+          </li>
+          <li class="menu-item">
+            <span class="item-name"
+              >Fla-Vor-Ice <span class="item-notes">(Freeze Pop)</span></span
+            >
+            <span class="leader"></span>
+            <span class="item-price">$0.50</span>
+          </li>
+          <li class="menu-item">
+            <span class="item-name"
+              >Ice Cream Sandwich<span
+                class="allergen-icon"
+                title="Contains Wheat, Milk, Soy"
+                >🌾 🥛 🌱</span
+              ></span
+            >
+            <span class="leader"></span>
+            <span class="item-price">$3.50</span>
+          </li>
+          <li class="menu-item">
+            <span class="item-name"
+              >Orange Dream Bar<span
+                class="allergen-icon"
+                title="Contains Milk, Soy"
+                >🥛 🌱</span
+              ></span
+            >
+            <span class="leader"></span>
+            <span class="item-price">$2.50</span>
+          </li>
+          <li class="menu-item">
+            <span class="item-name"
+              >Rainbow Sherbet Cool Tubes<span
+                class="allergen-icon"
+                title="Contains Milk"
+                >🥛</span
+              ></span
+            >
+            <span class="leader"></span>
+            <span class="item-price">$3.50</span>
+          </li>
+          <li class="menu-item">
+            <span class="item-name"
+              >Strawberry Eclair<span
+                class="allergen-icon"
+                title="Contains Wheat, Milk, Soy"
+                >🌾 🥛 🌱</span
+              ></span
+            >
+            <span class="leader"></span>
+            <span class="item-price">$3.50</span>
+          </li>
+          <li class="menu-item">
+            <span class="item-name"
+              >Vanilla Cone<span
+                class="allergen-icon"
+                title="Contains Wheat, Milk, Soy, Peanuts"
+                >🌾 🥛 🌱 🥜</span
+              ></span
+            >
+            <span class="leader"></span>
+            <span class="item-price">$3.50</span>
+          </li>
+        </ul>
+      </section>
+    </main>
+  </body>
+</html>
