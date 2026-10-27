@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ashland Skateland | Calendar</title>
+    <style>
+      :root {
+        --bg-black-magic: #1b1b1b;
+        --neon-cyan: #3ff0ff;
+        --neon-pink: #d6336c;
+        --border-color: #333333;
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        background-color: var(--bg-black-magic);
+      }
+      header {
+        text-align: center;
+        padding: 1rem;
+        border-bottom: 3px solid var(--neon-pink);
+      }
+      .brand {
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+          Arial, sans-serif;
+        font-weight: 900;
+        text-transform: uppercase;
+        letter-spacing: 0.03em;
+        color: #f0f0f0;
+        text-shadow:
+          0 0 6px var(--neon-cyan),
+          0 0 16px var(--neon-pink);
+      }
+      header .brand {
+        font-size: clamp(1.25rem, 5vw, 1.75rem);
+      }
+      .back-nav {
+        margin-top: 0.5rem;
+        display: flex;
+        justify-content: center;
+        gap: 1.25rem;
+      }
+      .back-nav a {
+        color: var(--neon-cyan);
+        text-decoration: none;
+        font-size: 0.9rem;
+        font-weight: 600;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+          Arial, sans-serif;
+      }
+      .back-nav a:hover {
+        text-decoration: underline;
+      }
+      .pdf-container {
+        width: 100%;
+        max-width: 100vw;
+        /* Match your landscape aspect ratio (width / height) */
+        aspect-ratio: 11 / 8.5;
+        overflow: hidden; /* Suppresses outer scrollbars */
+        margin: 0 auto;
+      }
+
+      .pdf-container iframe {
+        width: 100%;
+        height: 100%;
+        border: none;
+      }
+
+      .responsive-pdf {
+        width: 100%;
+        /* Set aspect ratio to match your document (A4 = 1/1.414, US Letter = 8.5/11) */
+        aspect-ratio: 8.5 / 11;
+
+        /* Ensure it never overflows the viewport screen */
+        max-width: 100vw;
+        max-height: 100vh;
+
+        border: none;
+        display: block;
+        margin: 0 auto; /* Center horizontally */
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <span class="brand">Ashland Skateland</span>
+      <nav class="back-nav">
+        <a href="/">&larr; Home</a>
+        <a href="/menu/">Menu</a>
+      </nav>
+    </header>
+    <div class="pdf-container">
+      <iframe src="october.pdf#view=FitW"></iframe>
+    </div>
+  </body>
+</html>
