@@ -7,6 +7,9 @@
     <style>
       :root {
         --bg-black-magic: #1b1b1b;
+        --card-bg: #262626;
+        --text-main: #f0f0f0;
+        --text-muted: #aaaaaa;
         --neon-cyan: #3ff0ff;
         --neon-pink: #d6336c;
         --border-color: #333333;
@@ -18,20 +21,21 @@
       }
       body {
         background-color: var(--bg-black-magic);
+        color: var(--text-main);
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+          Arial, sans-serif;
       }
+
       header {
         text-align: center;
         padding: 1rem;
         border-bottom: 3px solid var(--neon-pink);
       }
       .brand {
-        font-family:
-          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
-          Arial, sans-serif;
         font-weight: 900;
         text-transform: uppercase;
         letter-spacing: 0.03em;
-        color: #f0f0f0;
         text-shadow:
           0 0 6px var(--neon-cyan),
           0 0 16px var(--neon-pink);
@@ -50,40 +54,308 @@
         text-decoration: none;
         font-size: 0.9rem;
         font-weight: 600;
-        font-family:
-          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
-          Arial, sans-serif;
       }
       .back-nav a:hover {
         text-decoration: underline;
       }
-      .pdf-container {
-        width: 100%;
-        max-width: 100vw;
-        /* Match your landscape aspect ratio (width / height) */
-        aspect-ratio: 11 / 8.5;
-        overflow: hidden; /* Suppresses outer scrollbars */
+
+      .calendar-toolbar {
+        display: flex;
+        justify-content: center;
+        padding: 1.25rem 1rem 0;
+      }
+      .btn-print {
+        background-color: var(--neon-pink);
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        padding: 0.65rem 1.25rem;
+        font-family: inherit;
+        font-weight: bold;
+        font-size: 0.95rem;
+        cursor: pointer;
+        transition: background 0.2s;
+      }
+      .btn-print:hover {
+        background-color: #d6006b;
+      }
+
+      .calendar-page {
+        max-width: 1200px;
         margin: 0 auto;
+        padding: 1.5rem 1rem 3rem;
       }
 
-      .pdf-container iframe {
-        width: 100%;
-        height: 100%;
-        border: none;
+      .calendar {
+        background: var(--card-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 10px;
+        overflow: hidden;
       }
 
-      .responsive-pdf {
-        width: 100%;
-        /* Set aspect ratio to match your document (A4 = 1/1.414, US Letter = 8.5/11) */
-        aspect-ratio: 8.5 / 11;
+      .calendar-header {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+        padding: 1.25rem 1rem;
+        border-bottom: 2px solid var(--neon-pink);
+      }
+      .calendar-decor {
+        font-size: 1.5rem;
+      }
+      .calendar-title {
+        text-align: center;
+      }
+      .calendar-eyebrow {
+        font-size: 0.8rem;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: var(--neon-cyan);
+        font-weight: bold;
+      }
+      .calendar-month {
+        font-size: 1.8rem;
+        font-weight: 900;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
 
-        /* Ensure it never overflows the viewport screen */
-        max-width: 100vw;
-        max-height: 100vh;
+      .calendar-grid {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+      }
+      .calendar-dow {
+        background: #333;
+        color: var(--neon-cyan);
+        text-transform: uppercase;
+        font-size: 0.8rem;
+        font-weight: bold;
+        text-align: center;
+        padding: 0.6rem 0.25rem;
+        border-bottom: 1px solid var(--border-color);
+      }
+      .calendar-day {
+        min-height: 120px;
+        border-right: 1px solid var(--border-color);
+        border-bottom: 1px solid var(--border-color);
+        padding: 0.5rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.4rem;
+      }
+      .calendar-day.empty {
+        background: rgba(255, 255, 255, 0.02);
+      }
+      .day-number-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+      }
+      .day-weekday {
+        display: none;
+        font-size: 0.75rem;
+        color: var(--text-muted);
+        text-transform: uppercase;
+      }
+      .day-number {
+        font-weight: bold;
+        color: var(--text-muted);
+        font-size: 0.95rem;
+      }
+      .calendar-day.today {
+        background: rgba(63, 240, 255, 0.08);
+      }
+      .calendar-day.today .day-number {
+        color: var(--neon-cyan);
+      }
 
-        border: none;
-        display: block;
-        margin: 0 auto; /* Center horizontally */
+      .day-sessions {
+        display: flex;
+        flex-direction: column;
+        gap: 0.35rem;
+      }
+      .session {
+        border-left: 3px solid var(--neon-cyan);
+        padding-left: 0.4rem;
+      }
+      .session-special {
+        border-left-color: var(--neon-pink);
+      }
+      .session-time {
+        font-size: 0.78rem;
+        font-weight: bold;
+        color: var(--text-main);
+      }
+      .session-label {
+        font-size: 0.75rem;
+        color: var(--text-muted);
+      }
+
+      .calendar-day.closed {
+        background: rgba(214, 51, 108, 0.08);
+      }
+      .day-closed {
+        text-align: center;
+        margin: auto 0;
+      }
+      .closed-reason {
+        font-weight: bold;
+        color: var(--neon-pink);
+        font-size: 0.85rem;
+      }
+      .closed-note {
+        font-size: 0.75rem;
+        color: var(--text-muted);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+
+      .calendar-promo {
+        text-align: center;
+        padding: 1rem;
+        border-top: 1px dashed var(--border-color);
+        color: var(--neon-cyan);
+        font-size: 0.9rem;
+      }
+
+      .calendar-footer {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        padding: 1rem 0.25rem 0;
+        color: var(--text-muted);
+        font-size: 0.8rem;
+      }
+
+      @media (max-width: 720px) {
+        .calendar-grid {
+          grid-template-columns: 1fr;
+        }
+        .calendar-dow {
+          display: none;
+        }
+        .calendar-day.empty {
+          display: none;
+        }
+        .calendar-day {
+          min-height: 0;
+          border-right: none;
+        }
+        .day-weekday {
+          display: inline;
+        }
+      }
+
+      @media print {
+        @page {
+          size: landscape;
+          margin: 6mm;
+        }
+        body {
+          background: #fff !important;
+          color: #000;
+        }
+        header,
+        .calendar-toolbar {
+          display: none !important;
+        }
+        .calendar-page {
+          padding: 0;
+          max-width: none;
+        }
+        .calendar {
+          background: #fff;
+          border: 2px solid #222;
+          border-radius: 0;
+        }
+        .calendar-header {
+          border-bottom-color: #222;
+        }
+        .calendar-eyebrow,
+        .calendar-month {
+          color: #222 !important;
+          text-shadow: none !important;
+        }
+        .calendar-dow {
+          background: #eee;
+          color: #222;
+          border-color: #999;
+        }
+        .calendar-day {
+          border-color: #999;
+          break-inside: avoid;
+          min-height: 0;
+          padding: 0.3rem;
+          gap: 0.2rem;
+        }
+        .calendar-header {
+          padding: 0.5rem 1rem;
+        }
+        .calendar-eyebrow {
+          font-size: 0.65rem;
+        }
+        .calendar-month {
+          font-size: 1.4rem;
+        }
+        .calendar-dow {
+          padding: 0.3rem 0.25rem;
+          font-size: 0.7rem;
+        }
+        .day-number,
+        .day-weekday,
+        .session-time,
+        .session-label {
+          color: #000 !important;
+        }
+        .day-number {
+          font-size: 0.8rem;
+        }
+        .day-weekday {
+          font-size: 0.65rem;
+        }
+        .session-time,
+        .session-label {
+          font-size: 0.68rem;
+        }
+        .closed-reason {
+          font-size: 0.75rem;
+        }
+        .closed-note {
+          font-size: 0.65rem;
+        }
+        .calendar-promo {
+          font-size: 0.7rem;
+          padding: 0.3rem;
+        }
+        .calendar-footer {
+          font-size: 0.65rem;
+          padding-top: 0.2rem;
+        }
+        .calendar-day.today {
+          background: none !important;
+        }
+        .session {
+          border-left-color: #666;
+        }
+        .session-special {
+          border-left-color: #b5472e;
+        }
+        .calendar-day.closed {
+          background: #f4e4e4 !important;
+        }
+        .closed-reason,
+        .closed-note {
+          color: #8a1f3c !important;
+        }
+        .calendar-promo {
+          color: #222;
+          border-top-color: #999;
+        }
+        .calendar-footer {
+          color: #333;
+        }
       }
     </style>
   </head>
@@ -95,8 +367,225 @@
         <a href="/menu/">Menu</a>
       </nav>
     </header>
-    <div class="pdf-container">
-      <iframe src="october.pdf#view=FitW"></iframe>
+
+    <div class="calendar-toolbar">
+      <button id="print-btn" class="btn-print" type="button">
+        🖨️ Print / Save as PDF
+      </button>
     </div>
+
+    <main class="calendar-page">
+      <div class="calendar" id="calendar">
+        <div class="calendar-header">
+          <span class="calendar-decor" aria-hidden="true">🍂</span>
+          <div class="calendar-title">
+            <div class="calendar-eyebrow" id="calendar-eyebrow"></div>
+            <div class="calendar-month" id="calendar-month"></div>
+          </div>
+          <span class="calendar-decor" aria-hidden="true">🍂</span>
+        </div>
+        <div class="calendar-grid" id="calendar-grid"></div>
+        <div class="calendar-promo" id="calendar-promo"></div>
+      </div>
+      <div class="calendar-footer">
+        <span id="footer-left"></span>
+        <span id="footer-right"></span>
+      </div>
+    </main>
+
+    <script>
+      // --- Monthly config -------------------------------------------------
+      // To publish a new month: update year/month below, then replace OVERRIDES
+      // with that month's closures/special events. WEEKLY_SCHEDULE mirrors the
+      // Public Skate Schedule table and SCHEDULE array on the home page
+      // (../index.html) — keep all three in sync if public skate hours change.
+      var CALENDAR = {
+        year: 2026,
+        month: 9, // 0 = January, 9 = October
+        eyebrow: "Skate Sessions Schedule",
+        promo:
+          "Fall into Fun at the Rink! Book birthday parties, private rentals, and beginner classes at ashlandskateland.com",
+        footerNote:
+          "Schedule subject to change · Visit ashlandskateland.com for details",
+      };
+
+      var WEEKLY_SCHEDULE = [
+        [{ start: "14:00", end: "16:30", price: 9, label: "Public Skate" }], // Sunday
+        [
+          {
+            start: "19:30",
+            end: "22:00",
+            price: 9,
+            label: "Adult Skate (18+)",
+          },
+        ], // Monday
+        [{ start: "19:00", end: "21:00", price: 7, label: "Public Skate" }], // Tuesday
+        [], // Wednesday — no public sessions
+        [
+          { start: "10:00", end: "12:00", price: 7, label: "Public Skate" },
+          { start: "19:00", end: "21:00", price: 7, label: "Christian Music" },
+        ], // Thursday
+        [{ start: "20:00", end: "22:30", price: 10, label: "Public Skate" }], // Friday
+        [
+          { start: "10:30", end: "12:30", price: 8, label: "Public Skate" },
+          { start: "14:00", end: "16:30", price: 9, label: "Public Skate" },
+          { start: "20:00", end: "22:30", price: 10, label: "Public Skate" },
+        ], // Saturday
+      ];
+
+      // One-off exceptions for this month, keyed by "YYYY-MM-DD".
+      // Use { closed: true, reason, note } for a closure, or
+      // { sessions: [...] } to fully replace that day's normal sessions
+      // (e.g. renaming a slot for a themed skate night). Add `special: true`
+      // to a session to highlight it.
+      var OVERRIDES = {
+        "2026-10-12": { closed: true, reason: "Construction", note: "RINK CLOSED" },
+        "2026-10-13": { closed: true, reason: "Construction", note: "RINK CLOSED" },
+        "2026-10-14": { closed: true, reason: "Construction", note: "RINK CLOSED" },
+        "2026-10-15": { closed: true, reason: "Construction", note: "RINK CLOSED" },
+        "2026-10-16": { closed: true, reason: "Construction", note: "RINK CLOSED" },
+        "2026-10-31": {
+          sessions: [
+            { start: "10:30", end: "12:30", price: 8, label: "Public Skate" },
+            { start: "14:00", end: "16:30", price: 9, label: "Public Skate" },
+            {
+              start: "20:00",
+              end: "22:30",
+              price: 10,
+              label: "🎃 Halloween Skate",
+              special: true,
+            },
+          ],
+        },
+      };
+
+      // --- Rendering --------------------------------------------------------
+      var DOW_NAMES = [
+        "Sunday",
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+      ];
+
+      function pad(n) {
+        return String(n).padStart(2, "0");
+      }
+
+      function dateKey(year, month, day) {
+        return year + "-" + pad(month + 1) + "-" + pad(day);
+      }
+
+      function formatTime12(hhmm) {
+        var parts = hhmm.split(":").map(Number);
+        var h = parts[0];
+        var m = parts[1];
+        var ampm = h >= 12 ? "pm" : "am";
+        h = h % 12;
+        if (h === 0) h = 12;
+        return h + ":" + pad(m) + ampm;
+      }
+
+      function sessionsForDate(year, month, day) {
+        var override = OVERRIDES[dateKey(year, month, day)];
+        if (override && override.closed) {
+          return { closed: true, reason: override.reason, note: override.note };
+        }
+        if (override && override.sessions) {
+          return { sessions: override.sessions };
+        }
+        return { sessions: WEEKLY_SCHEDULE[new Date(year, month, day).getDay()] };
+      }
+
+      function makeEl(tag, className, text) {
+        var el = document.createElement(tag);
+        if (className) el.className = className;
+        if (text !== undefined) el.textContent = text;
+        return el;
+      }
+
+      function renderCalendar() {
+        var year = CALENDAR.year;
+        var month = CALENDAR.month;
+        var firstDow = new Date(year, month, 1).getDay();
+        var daysInMonth = new Date(year, month + 1, 0).getDate();
+        var monthLabel = new Date(year, month, 1).toLocaleDateString("en-US", {
+          month: "long",
+        });
+        var monthYear = monthLabel + " " + year;
+
+        document.title = "Ashland Skateland | " + monthYear + " Calendar";
+        document.getElementById("calendar-eyebrow").textContent = CALENDAR.eyebrow;
+        document.getElementById("calendar-month").textContent = monthYear;
+        document.getElementById("calendar-promo").textContent = CALENDAR.promo;
+        document.getElementById("footer-left").textContent =
+          CALENDAR.eyebrow + " · " + monthYear;
+        document.getElementById("footer-right").textContent = CALENDAR.footerNote;
+
+        var grid = document.getElementById("calendar-grid");
+        grid.innerHTML = "";
+
+        DOW_NAMES.forEach(function (name) {
+          grid.appendChild(makeEl("div", "calendar-dow", name));
+        });
+
+        var today = new Date();
+        var isCurrentMonth =
+          today.getFullYear() === year && today.getMonth() === month;
+
+        for (var i = 0; i < firstDow; i++) {
+          grid.appendChild(makeEl("div", "calendar-day empty"));
+        }
+
+        for (var day = 1; day <= daysInMonth; day++) {
+          var info = sessionsForDate(year, month, day);
+          var cell = makeEl("div", "calendar-day" + (info.closed ? " closed" : ""));
+          if (isCurrentMonth && today.getDate() === day) {
+            cell.classList.add("today");
+          }
+
+          var numberRow = makeEl("div", "day-number-row");
+          numberRow.appendChild(
+            makeEl("span", "day-weekday", DOW_NAMES[new Date(year, month, day).getDay()])
+          );
+          numberRow.appendChild(makeEl("span", "day-number", String(day)));
+          cell.appendChild(numberRow);
+
+          if (info.closed) {
+            var closedBox = makeEl("div", "day-closed");
+            closedBox.appendChild(makeEl("div", "closed-reason", "🚧 " + info.reason));
+            closedBox.appendChild(makeEl("div", "closed-note", info.note));
+            cell.appendChild(closedBox);
+          } else if (info.sessions && info.sessions.length) {
+            var list = makeEl("div", "day-sessions");
+            info.sessions.forEach(function (s) {
+              var item = makeEl("div", "session" + (s.special ? " session-special" : ""));
+              item.appendChild(
+                makeEl(
+                  "div",
+                  "session-time",
+                  formatTime12(s.start) + " – " + formatTime12(s.end)
+                )
+              );
+              item.appendChild(
+                makeEl("div", "session-label", s.label + " · $" + s.price)
+              );
+              list.appendChild(item);
+            });
+            cell.appendChild(list);
+          }
+
+          grid.appendChild(cell);
+        }
+      }
+
+      document.getElementById("print-btn").addEventListener("click", function () {
+        window.print();
+      });
+
+      renderCalendar();
+    </script>
   </body>
 </html>
