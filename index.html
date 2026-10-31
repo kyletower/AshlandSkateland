@@ -1,1083 +1,1051 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Ashland Skateland | Roller Skating, Birthday Parties & Events</title>
-    <style>
-      :root {
-        --bg-black-magic: #1b1b1b;
-        --card-bg: #262626;
-        --text-main: #f0f0f0;
-        --text-muted: #aaaaaa;
-        --neon-pink: #d6336c;
-        --neon-cyan: #3ff0ff;
-        --border-color: #333333;
-        --header-height: 100px;
-      }
 
-      * {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-      }
-      body {
-        background-color: var(--bg-black-magic);
-        color: var(--text-main);
-        font-family:
-          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
-          Arial, sans-serif;
-        line-height: 1.6;
-      }
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ashland Skateland | Roller Skating, Birthday Parties & Events</title>
+  <style>
+    :root {
+      --bg-black-magic: #1b1b1b;
+      --card-bg: #262626;
+      --text-main: #f0f0f0;
+      --text-muted: #aaaaaa;
+      --neon-pink: #d6336c;
+      --neon-cyan: #3ff0ff;
+      --border-color: #333333;
+      --header-height: 100px;
+    }
 
-      /* Navigation */
-      header {
-        position: sticky;
-        top: 0;
-        background-color: rgba(27, 27, 27, 0.95);
-        backdrop-filter: blur(8px);
-        border-bottom: 2px solid var(--neon-pink);
-        z-index: 100;
-      }
-      section[id] {
-        scroll-margin-top: var(--header-height);
-      }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-black-magic);
+      color: var(--text-main);
+      font-family:
+        -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+        Arial, sans-serif;
+      line-height: 1.6;
+    }
+
+    /* Navigation */
+    header {
+      position: sticky;
+      top: 0;
+      background-color: rgba(27, 27, 27, 0.95);
+      backdrop-filter: blur(8px);
+      border-bottom: 2px solid var(--neon-pink);
+      z-index: 100;
+    }
+
+    section[id] {
+      scroll-margin-top: var(--header-height);
+    }
+
+    .nav-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+    }
+
+    .brand {
+      font-family:
+        -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+        Arial, sans-serif;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      color: var(--text-main);
+      text-shadow:
+        0 0 6px var(--neon-cyan),
+        0 0 16px var(--neon-pink);
+      white-space: nowrap;
+    }
+
+    .logo .brand {
+      font-size: clamp(1rem, 4vw, 1.4rem);
+    }
+
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 0.5rem 0.75rem;
+      align-items: center;
+    }
+
+    nav a {
+      color: var(--text-main);
+      text-decoration: none;
+      margin-left: 0;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: color 0.2s;
+    }
+
+    nav a:hover {
+      color: var(--neon-cyan);
+    }
+
+    nav a.nav-cta {
+      background-color: var(--neon-pink);
+      border-radius: 4px;
+      color: #fff;
+      padding: 0.6rem 0.9rem;
+      margin-left: 0;
+      display: inline-block;
+      line-height: 1.2;
+    }
+
+    nav a.nav-cta:hover {
+      background-color: #d6006b;
+      color: #fff;
+    }
+
+    @media (max-width: 768px) {
       .nav-container {
-        max-width: 1100px;
-        margin: 0 auto;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 1rem;
-      }
-      .logo {
-        display: flex;
-        align-items: center;
-      }
-      .brand {
-        font-family:
-          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
-          Arial, sans-serif;
-        font-weight: 900;
-        text-transform: uppercase;
-        letter-spacing: 0.03em;
-        color: var(--text-main);
-        text-shadow:
-          0 0 6px var(--neon-cyan),
-          0 0 16px var(--neon-pink);
-        white-space: nowrap;
-      }
-      .logo .brand {
-        font-size: clamp(1rem, 4vw, 1.4rem);
-      }
-      nav {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: flex-end;
-        gap: 0.5rem 0.75rem;
-        align-items: center;
-      }
-      nav a {
-        color: var(--text-main);
-        text-decoration: none;
-        margin-left: 0;
-        font-weight: 600;
-        font-size: 0.95rem;
-        transition: color 0.2s;
-      }
-      nav a:hover {
-        color: var(--neon-cyan);
-      }
-      nav a.nav-cta {
-        background-color: var(--neon-pink);
-        border-radius: 4px;
-        color: #fff;
-        padding: 0.6rem 0.9rem;
-        margin-left: 0;
-        display: inline-block;
-        line-height: 1.2;
-      }
-      nav a.nav-cta:hover {
-        background-color: #d6006b;
-        color: #fff;
-      }
-      @media (max-width: 768px) {
-        .nav-container {
-          flex-direction: column;
-          gap: 0.75rem;
-        }
-        nav {
-          justify-content: center;
-          gap: 0.5rem 0.65rem;
-        }
-        nav a {
-          font-size: 0.85rem;
-        }
-        nav a.nav-cta {
-          padding: 0.65rem 0.95rem;
-        }
-      }
-
-      /* Hero */
-      .hero {
-        text-align: center;
-        padding: 4rem 1rem 3rem;
-        background: radial-gradient(
-          circle at center,
-          #2c2c2c 0%,
-          var(--bg-black-magic) 70%
-        );
-        border-bottom: 1px solid var(--border-color);
-      }
-      .hero h1 {
-        margin-bottom: 0.5rem;
-      }
-      .hero-brand {
-        display: block;
-        font-size: clamp(2.25rem, 7vw, 3.75rem);
-      }
-      .hero p {
-        color: var(--text-muted);
-        font-size: 1.2rem;
-        max-width: 600px;
-        margin: 0 auto 1.5rem;
-      }
-      .badge-bar {
-        display: flex;
-        justify-content: center;
-        gap: 1.5rem;
-        flex-wrap: wrap;
-      }
-      .badge {
-        background: var(--card-bg);
-        border: 1px solid var(--neon-cyan);
-        color: var(--neon-cyan);
-        padding: 0.4rem 1rem;
-        border-radius: 20px;
-        font-size: 0.9rem;
-        font-weight: bold;
-      }
-
-      /* Main Container */
-      .container {
-        max-width: 1100px;
-        margin: 0 auto;
-        padding: 3rem 1rem;
-      }
-
-      .section-title {
-        font-size: 2rem;
-        text-transform: uppercase;
-        margin-bottom: 1.5rem;
-        position: relative;
-        display: inline-block;
-      }
-      .section-title::after {
-        content: "";
-        display: block;
-        height: 3px;
-        background: var(--neon-cyan);
-        width: 100%;
-        margin-top: 4px;
-      }
-
-      /* Grid Layouts */
-      .grid-2 {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 1.5rem;
-      }
-      .grid-3 {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        gap: 1.5rem;
-      }
-
-      /* Stat grids — shared by Today's Session, Building Rental & Fundraiser sliders */
-      .stat-grid {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 1.5rem;
-        text-align: center;
-      }
-      @media (max-width: 600px) {
-        .stat-grid {
-          grid-template-columns: repeat(2, 1fr);
-        }
-      }
-      .stat-label {
-        font-size: 0.8rem;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        color: var(--text-muted);
-        margin-bottom: 0.4rem;
-      }
-      .stat-value {
-        font-size: 1.6rem;
-        font-weight: bold;
-        color: var(--neon-cyan);
-      }
-      .today-timer {
-        color: var(--neon-pink);
-        font-variant-numeric: tabular-nums;
-      }
-
-      /* Sliders */
-      .slider-row {
-        margin-bottom: 1.5rem;
-      }
-      .slider-row label {
-        display: flex;
-        justify-content: space-between;
-        font-weight: bold;
-        margin-bottom: 0.5rem;
-      }
-      .slider-row label span {
-        color: var(--neon-cyan);
-      }
-      input[type="range"] {
-        width: 100%;
-        accent-color: var(--neon-pink);
-      }
-
-      .card {
-        background-color: var(--card-bg);
-        border-radius: 8px;
-        padding: 1.5rem;
-        border: 1px solid var(--border-color);
-        display: flex;
         flex-direction: column;
-        justify-content: space-between;
-      }
-      .card-header {
-        border-bottom: 1px solid var(--border-color);
-        padding-bottom: 0.75rem;
-        margin-bottom: 1rem;
-      }
-      .card-header h3 {
-        color: var(--neon-pink);
-        font-size: 1.3rem;
-      }
-      .price {
-        font-size: 1.8rem;
-        font-weight: bold;
-        color: var(--neon-cyan);
-        margin: 0.5rem 0;
-      }
-      .deposit-tag {
-        font-size: 0.85rem;
-        color: var(--neon-cyan);
-        text-transform: uppercase;
-        font-weight: bold;
+        gap: 0.75rem;
       }
 
-      .map-embed {
-        margin-top: 1rem;
-        border-radius: 8px;
-        overflow: hidden;
-        border: 1px solid var(--border-color);
-      }
-      .map-embed iframe {
-        display: block;
-      }
-
-      ul.feature-list {
-        list-style: none;
-        margin: 1rem 0;
-      }
-      ul.feature-list li {
-        padding: 0.3rem 0;
-        border-bottom: 1px stroke var(--border-color);
-        color: var(--text-muted);
-      }
-      ul.feature-list li::before {
-        content: "✓ ";
-        color: var(--neon-cyan);
-      }
-      ul.feature-list ul {
-        list-style: disc;
-        margin: 0.25rem 0 0.25rem 1.25rem;
-        padding-left: 1rem;
-      }
-      ul.feature-list ul li {
-        border-bottom: 0;
-        padding: 0.15rem 0;
-      }
-      ul.feature-list ul li::before {
-        content: none;
-      }
-
-      /* Medal badges */
-      .medal-item {
-        text-align: center;
-      }
-      .medal-badge {
-        width: 56px;
-        height: 56px;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
+      nav {
         justify-content: center;
-        margin: 0 auto 0.75rem;
-        font-weight: 900;
-        font-size: 1.4rem;
-        color: #1b1b1b;
-      }
-      .medal-badge.bronze {
-        background: linear-gradient(135deg, #e3a66f, #a9672f);
-      }
-      .medal-badge.silver {
-        background: linear-gradient(135deg, #f0f0f0, #a8a8a8);
-      }
-      .medal-badge.gold {
-        background: linear-gradient(135deg, #ffe08a, #d4af37);
-      }
-      .medal-item h4 {
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-        margin-bottom: 0.25rem;
-      }
-      .medal-time {
-        color: var(--neon-cyan);
-        font-weight: bold;
-        font-size: 0.9rem;
-        margin-bottom: 0.5rem;
-      }
-      .medal-desc {
-        font-size: 0.9rem;
-        color: var(--text-muted);
+        gap: 0.5rem 0.65rem;
       }
 
-      /* Tables */
-      table {
-        width: 100%;
-        border-collapse: collapse;
-        margin-top: 1rem;
-        background: var(--card-bg);
-        border-radius: 8px;
-        overflow: hidden;
-      }
-      th,
-      td {
-        padding: 0.85rem 1rem;
-        text-align: left;
-        border-bottom: 1px solid var(--border-color);
-      }
-      tr.day-end td {
-        border-bottom: 3px solid var(--neon-cyan);
-      }
-      td.day-label {
-        border-bottom: 3px solid var(--neon-cyan);
-      }
-      th {
-        background-color: #333;
-        color: var(--neon-cyan);
-        text-transform: uppercase;
+      nav a {
         font-size: 0.85rem;
       }
-      tr.current-day > td {
-        background-color: rgba(63, 240, 255, 0.1);
-      }
-      tr.current-day td.day-label {
-        color: var(--neon-cyan);
-      }
-      tr.current-day td.day-label::after {
-        content: "Today";
-        display: inline-block;
-        margin-left: 0.5rem;
-        padding: 0.1rem 0.5rem;
-        border-radius: 10px;
-        background: var(--neon-pink);
-        color: #fff;
-        font-size: 0.65rem;
-        font-weight: bold;
-        text-transform: uppercase;
-        vertical-align: middle;
-      }
 
-      /* Buttons */
-      .btn {
-        display: inline-block;
-        background-color: var(--neon-pink);
-        color: #fff;
-        padding: 0.75rem 1.5rem;
-        border-radius: 4px;
-        text-decoration: none;
-        font-weight: bold;
-        text-transform: uppercase;
-        text-align: center;
-        transition: background 0.2s;
+      nav a.nav-cta {
+        padding: 0.65rem 0.95rem;
       }
-      .btn:hover {
-        background-color: #d6006b;
+    }
+
+    /* Hero */
+    .hero {
+      text-align: center;
+      padding: 4rem 1rem 3rem;
+      background: radial-gradient(circle at center,
+          #2c2c2c 0%,
+          var(--bg-black-magic) 70%);
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .hero h1 {
+      margin-bottom: 0.5rem;
+    }
+
+    .hero-brand {
+      display: block;
+      font-size: clamp(2.25rem, 7vw, 3.75rem);
+    }
+
+    .hero p {
+      color: var(--text-muted);
+      font-size: 1.2rem;
+      max-width: 600px;
+      margin: 0 auto 1.5rem;
+    }
+
+    .badge-bar {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .badge {
+      background: var(--card-bg);
+      border: 1px solid var(--neon-cyan);
+      color: var(--neon-cyan);
+      padding: 0.4rem 1rem;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      font-weight: bold;
+    }
+
+    /* Main Container */
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 3rem 1rem;
+    }
+
+    .section-title {
+      font-size: 2rem;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+      position: relative;
+      display: inline-block;
+    }
+
+    .section-title::after {
+      content: "";
+      display: block;
+      height: 3px;
+      background: var(--neon-cyan);
+      width: 100%;
+      margin-top: 4px;
+    }
+
+    /* Grid Layouts */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    /* Stat grids — shared by Today's Session, Building Rental & Fundraiser sliders */
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+      text-align: center;
+    }
+
+    @media (max-width: 600px) {
+      .stat-grid {
+        grid-template-columns: repeat(2, 1fr);
       }
-      .section-action {
-        display: flex;
-        justify-content: flex-end;
-        margin-top: 1rem;
-      }
+    }
+
+    .stat-label {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-muted);
+      margin-bottom: 0.4rem;
+    }
+
+    .stat-value {
+      font-size: 1.6rem;
+      font-weight: bold;
+      color: var(--neon-cyan);
+    }
+
+    .today-timer {
+      color: var(--neon-pink);
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* Sliders */
+    .slider-row {
+      margin-bottom: 1.5rem;
+    }
+
+    .slider-row label {
+      display: flex;
+      justify-content: space-between;
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+    }
+
+    .slider-row label span {
+      color: var(--neon-cyan);
+    }
+
+    input[type="range"] {
+      width: 100%;
+      accent-color: var(--neon-pink);
+    }
+
+    .card {
+      background-color: var(--card-bg);
+      border-radius: 8px;
+      padding: 1.5rem;
+      border: 1px solid var(--border-color);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .card-header {
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 0.75rem;
+      margin-bottom: 1rem;
+    }
+
+    .card-header h3 {
+      color: var(--neon-pink);
+      font-size: 1.3rem;
+    }
+
+    .price {
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: var(--neon-cyan);
+      margin: 0.5rem 0;
+    }
+
+    .deposit-tag {
+      font-size: 0.85rem;
+      color: var(--neon-cyan);
+      text-transform: uppercase;
+      font-weight: bold;
+    }
+
+    .map-embed {
+      margin-top: 1rem;
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid var(--border-color);
+    }
+
+    .map-embed iframe {
+      display: block;
+    }
+
+    ul.feature-list {
+      list-style: none;
+      margin: 1rem 0;
+    }
+
+    ul.feature-list li {
+      padding: 0.3rem 0;
+      border-bottom: 1px stroke var(--border-color);
+      color: var(--text-muted);
+    }
+
+    ul.feature-list li::before {
+      content: "✓ ";
+      color: var(--neon-cyan);
+    }
+
+    ul.feature-list ul {
+      list-style: disc;
+      margin: 0.25rem 0 0.25rem 1.25rem;
+      padding-left: 1rem;
+    }
+
+    ul.feature-list ul li {
+      border-bottom: 0;
+      padding: 0.15rem 0;
+    }
+
+    ul.feature-list ul li::before {
+      content: none;
+    }
+
+    /* Medal badges */
+    .medal-item {
+      text-align: center;
+    }
+
+    .medal-badge {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 0.75rem;
+      font-weight: 900;
+      font-size: 1.4rem;
+      color: #1b1b1b;
+    }
+
+    .medal-badge.bronze {
+      background: linear-gradient(135deg, #e3a66f, #a9672f);
+    }
+
+    .medal-badge.silver {
+      background: linear-gradient(135deg, #f0f0f0, #a8a8a8);
+    }
+
+    .medal-badge.gold {
+      background: linear-gradient(135deg, #ffe08a, #d4af37);
+    }
+
+    .medal-item h4 {
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 0.25rem;
+    }
+
+    .medal-time {
+      color: var(--neon-cyan);
+      font-weight: bold;
+      font-size: 0.9rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .medal-desc {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    /* Tables */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+      background: var(--card-bg);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    th,
+    td {
+      padding: 0.85rem 1rem;
+      text-align: left;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    tr.day-end td {
+      border-bottom: 3px solid var(--neon-cyan);
+    }
+
+    td.day-label {
+      border-bottom: 3px solid var(--neon-cyan);
+    }
+
+    th {
+      background-color: #333;
+      color: var(--neon-cyan);
+      text-transform: uppercase;
+      font-size: 0.85rem;
+    }
+
+    tr.current-day>td {
+      background-color: rgba(63, 240, 255, 0.1);
+    }
+
+    tr.current-day td.day-label {
+      color: var(--neon-cyan);
+    }
+
+    tr.current-day td.day-label::after {
+      content: "Today";
+      display: inline-block;
+      margin-left: 0.5rem;
+      padding: 0.1rem 0.5rem;
+      border-radius: 10px;
+      background: var(--neon-pink);
+      color: #fff;
+      font-size: 0.65rem;
+      font-weight: bold;
+      text-transform: uppercase;
+      vertical-align: middle;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-block;
+      background-color: var(--neon-pink);
+      color: #fff;
+      padding: 0.75rem 1.5rem;
+      border-radius: 4px;
+      text-decoration: none;
+      font-weight: bold;
+      text-transform: uppercase;
+      text-align: center;
+      transition: background 0.2s;
+    }
+
+    .btn:hover {
+      background-color: #d6006b;
+    }
+
+    .section-action {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 1rem;
+    }
+
+    .section-action .btn {
+      min-width: 140px;
+    }
+
+    @media (max-width: 600px) {
       .section-action .btn {
-        min-width: 140px;
+        width: 100%;
       }
-      @media (max-width: 600px) {
-        .section-action .btn {
-          width: 100%;
-        }
-      }
+    }
 
-      /* Footer */
-      footer {
-        background-color: #121212;
-        border-top: 1px solid var(--border-color);
-        text-align: center;
-        padding: 2rem 1rem;
-        color: var(--text-muted);
-        font-size: 0.9rem;
-      }
-    </style>
-  </head>
-  <body>
-    <header>
-      <div class="nav-container">
-        <div class="logo">
-          <span class="brand">Ashland Skateland</span>
-        </div>
-        <nav>
-          <a href="#schedule">Schedule</a>
-          <a href="/calendar/">Calendar</a>
-          <a href="/menu/">Menu</a>
-          <a href="#parties">Parties</a>
-          <a href="#private">Private Rentals</a>
-          <a href="#classes">Classes</a>
-          <a href="#reviews">Reviews</a>
-          <a href="#contact">Contact</a>
-          <a
-            class="nav-cta"
-            href="https://forms.gle/XhmiqauXtZekBZHA9"
-            target="_blank"
-            rel="noopener"
-            >Book a Party!</a
-          >
-          <a
-            class="nav-cta"
-            href="https://forms.gle/VzsfRVDkr8UJzkeJA"
-            target="_blank"
-            rel="noopener"
-            >Join Our Team</a
-          >
-        </nav>
+    /* Footer */
+    footer {
+      background-color: #121212;
+      border-top: 1px solid var(--border-color);
+      text-align: center;
+      padding: 2rem 1rem;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="nav-container">
+      <div class="logo">
+        <span class="brand">Ashland Skateland</span>
       </div>
-    </header>
+      <nav>
+        <a href="#schedule">Schedule</a>
+        <a href="/calendar/">Calendar</a>
+        <a href="/menu/">Menu</a>
+        <a href="#parties">Parties</a>
+        <a href="#private">Private Rentals</a>
+        <a href="#classes">Classes</a>
+        <a href="#reviews">Reviews</a>
+        <a href="#contact">Contact</a>
+        <a class="nav-cta" href="https://forms.gle/XhmiqauXtZekBZHA9" target="_blank" rel="noopener">Book a Party!</a>
+        <a class="nav-cta" href="https://forms.gle/VzsfRVDkr8UJzkeJA" target="_blank" rel="noopener">Join Our Team</a>
+      </nav>
+    </div>
+  </header>
 
-    <section class="hero">
-      <h1 class="brand hero-brand">Ashland Skateland</h1>
-      <p>
-        RVA's home for classic roller skating, birthday celebrations, and family
-        fun.
-      </p>
-      <div class="badge-bar">
-        <span class="badge">Skate Rental: $5</span>
-        <span class="badge">Skate Mates: $5</span>
+  <section class="hero">
+    <h1 class="brand hero-brand">Ashland Skateland</h1>
+    <p>
+      RVA's home for classic roller skating, birthday celebrations, and family
+      fun.
+    </p>
+    <div class="badge-bar">
+      <span class="badge">Skate Rental: $5</span>
+      <span class="badge">Skate Mates: $5</span>
+    </div>
+  </section>
+
+  <div class="container">
+    <section id="today" style="margin-bottom: 4rem">
+      <h2 class="section-title">Next Session</h2>
+      <div class="card">
+        <div class="stat-grid">
+          <div>
+            <div class="stat-label">Next Skate</div>
+            <div class="stat-value" id="today-next">—</div>
+          </div>
+          <div>
+            <div class="stat-label">Doors Open</div>
+            <div class="stat-value" id="today-doors">—</div>
+          </div>
+          <div>
+            <div class="stat-label">Admission</div>
+            <div class="stat-value" id="today-admission">—</div>
+          </div>
+          <div>
+            <div class="stat-label" id="today-countdown-label">Loading…</div>
+            <div class="stat-value today-timer" id="today-timer">
+              --:--:--
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
-    <div class="container">
-      <section id="today" style="margin-bottom: 4rem">
-        <h2 class="section-title">Next Session</h2>
+    <section id="schedule" style="margin-bottom: 4rem">
+      <h2 class="section-title">Public Skate Schedule & Admission</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Day</th>
+            <th>Session Details</th>
+            <th>Admission</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="day-end" data-day="0">
+            <td class="day-label"><strong>Sunday</strong></td>
+            <td>Public Skate (2:00pm – 4:30pm)</td>
+            <td>$9</td>
+          </tr>
+          <tr class="day-end" data-day="1">
+            <td class="day-label"><strong>Monday</strong></td>
+            <td>Adult Skate, 18+ Only (7:30pm – 10:00pm)</td>
+            <td>$9</td>
+          </tr>
+
+          <tr data-day="4">
+            <td rowspan="2" class="day-label"><strong>Thursday</strong></td>
+            <td>Public Skate (10:00am – 12:00pm)</td>
+            <td>$7</td>
+          </tr>
+          <tr class="day-end" data-day="4">
+            <td>Christian Music Skate (7:00pm – 9:00pm)</td>
+            <td>$7</td>
+          </tr>
+          <tr class="day-end" data-day="5">
+            <td class="day-label"><strong>Friday</strong></td>
+            <td>Public Skate (8:00pm – 10:30pm)</td>
+            <td>$10</td>
+          </tr>
+          <tr data-day="6">
+            <td rowspan="3" class="day-label"><strong>Saturday</strong></td>
+            <td>Public Skate (10:30am – 12:30pm)</td>
+            <td>$8</td>
+          </tr>
+          <tr data-day="6">
+            <td>Public Skate (2:00pm – 4:30pm)</td>
+            <td>$9</td>
+          </tr>
+          <tr class="day-end" data-day="6">
+            <td>Public Skate (8:00pm – 10:30pm)</td>
+            <td>$10</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="parties" style="margin-bottom: 4rem">
+      <h2 class="section-title">Party Packages</h2>
+      <div class="grid-3">
         <div class="card">
-          <div class="stat-grid">
-            <div>
-              <div class="stat-label">Next Skate</div>
-              <div class="stat-value" id="today-next">—</div>
+          <div>
+            <div class="card-header">
+              <h3>Public Party</h3>
             </div>
-            <div>
-              <div class="stat-label">Doors Open</div>
-              <div class="stat-value" id="today-doors">—</div>
+            <div class="price">$200</div>
+            <div class="deposit-tag">
+              50% Non-Refundable Deposit Required to Reserve
             </div>
-            <div>
-              <div class="stat-label">Admission</div>
-              <div class="stat-value" id="today-admission">—</div>
-            </div>
-            <div>
-              <div class="stat-label" id="today-countdown-label">Loading…</div>
-              <div class="stat-value today-timer" id="today-timer">
-                --:--:--
-              </div>
-            </div>
+            <ul class="feature-list">
+              <li>Includes up to 10 guests</li>
+              <li>Reserved table for the session</li>
+              <li>
+                Admission, skate rental, and drink per child guest and a
+                bucket of popcorn for the party guests.
+              </li>
+              <li>Birthday song & announcement</li>
+              <li>Each additional guest beyond 10: $13</li>
+              <li>
+                Available during any
+                <a href="#schedule" style="color: var(--neon-cyan)">Public Skate time slot</a>
+              </li>
+            </ul>
           </div>
+          <a href="sms:8047986550?&body=Hi%21%20I%27d%20like%20to%20book%20a%20Public%20Party" class="btn">Text to
+            Book</a>
         </div>
-      </section>
 
-      <section id="schedule" style="margin-bottom: 4rem">
-        <h2 class="section-title">Public Skate Schedule & Admission</h2>
-        <table>
-          <thead>
-            <tr>
-              <th>Day</th>
-              <th>Session Details</th>
-              <th>Admission</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr class="day-end" data-day="0">
-              <td class="day-label"><strong>Sunday</strong></td>
-              <td>Public Skate (2:00pm – 4:30pm)</td>
-              <td>$9</td>
-            </tr>
-            <tr class="day-end" data-day="1">
-              <td class="day-label"><strong>Monday</strong></td>
-              <td>Adult Skate, 18+ Only (7:30pm – 10:00pm)</td>
-              <td>$9</td>
-            </tr>
-            <tr class="day-end" data-day="2">
-              <td class="day-label"><strong>Tuesday</strong></td>
-              <td>Public Skate (7:00pm – 9:00pm)</td>
-              <td>$7</td>
-            </tr>
-            <tr data-day="4">
-              <td rowspan="2" class="day-label"><strong>Thursday</strong></td>
-              <td>Public Skate (10:00am – 12:00pm)</td>
-              <td>$7</td>
-            </tr>
-            <tr class="day-end" data-day="4">
-              <td>Christian Music Skate (7:00pm – 9:00pm)</td>
-              <td>$7</td>
-            </tr>
-            <tr class="day-end" data-day="5">
-              <td class="day-label"><strong>Friday</strong></td>
-              <td>Public Skate (8:00pm – 10:30pm)</td>
-              <td>$10</td>
-            </tr>
-            <tr data-day="6">
-              <td rowspan="3" class="day-label"><strong>Saturday</strong></td>
-              <td>Public Skate (10:30am – 12:30pm)</td>
-              <td>$8</td>
-            </tr>
-            <tr data-day="6">
-              <td>Public Skate (2:00pm – 4:30pm)</td>
-              <td>$9</td>
-            </tr>
-            <tr class="day-end" data-day="6">
-              <td>Public Skate (8:00pm – 10:30pm)</td>
-              <td>$10</td>
-            </tr>
-          </tbody>
-        </table>
-      </section>
-
-      <section id="parties" style="margin-bottom: 4rem">
-        <h2 class="section-title">Party Packages</h2>
-        <div class="grid-3">
-          <div class="card">
-            <div>
-              <div class="card-header">
-                <h3>Public Party</h3>
-              </div>
-              <div class="price">$200</div>
-              <div class="deposit-tag">
-                50% Non-Refundable Deposit Required to Reserve
-              </div>
-              <ul class="feature-list">
-                <li>Includes up to 10 guests</li>
-                <li>Reserved table for the session</li>
-                <li>
-                  Admission, skate rental, and drink per child guest and a
-                  bucket of popcorn for the party guests.
-                </li>
-                <li>Birthday song & announcement</li>
-                <li>Each additional guest beyond 10: $13</li>
-                <li>
-                  Available during any
-                  <a href="#schedule" style="color: var(--neon-cyan)"
-                    >Public Skate time slot</a
-                  >
-                </li>
-              </ul>
-            </div>
-            <a
-              href="sms:8047986550?&body=Hi%21%20I%27d%20like%20to%20book%20a%20Public%20Party"
-              class="btn"
-              >Text to Book</a
-            >
-          </div>
-
-          <div class="card">
-            <div>
-              <div class="card-header">
-                <h3>Private Party</h3>
-              </div>
-              <div class="price">$275</div>
-              <div class="deposit-tag">
-                50% Non-Refundable Deposit Required to Reserve
-              </div>
-              <ul class="feature-list">
-                <li>Includes up to 10 guests</li>
-                <li>Exclusive use of the rink</li>
-                <li>
-                  Includes admission, skate rental, a whole pizza, a bucket of
-                  popcorn, plus a pitcher of soda.
-                </li>
-                <li>Parents & Grandparents admitted free</li>
-                <li>
-                  Available Time Slots:
-                  <ul>
-                    <li>Sundays 11:00am–1:00pm and 5:30pm–7:30pm</li>
-                    <li>Wednesdays 5:00pm–8:00pm</li>
-                    <li>Fridays 5:00pm–7:30pm</li>
-                    <li>Saturdays 5:30pm–7:30pm</li>
-                  </ul>
-                </li>
-                <li>
-                  Private parties are 1.5 hours; additional 30 minutes is $75
-                </li>
-                <li>Each additional guest beyond 10: $17</li>
-              </ul>
-            </div>
-            <a
-              href="sms:8047986550?&body=Hi%21%20I%27d%20like%20to%20book%20a%20Private%20Party"
-              class="btn"
-              >Text to Book</a
-            >
-          </div>
-        </div>
-      </section>
-
-      <section id="private" style="margin-bottom: 4rem">
-        <h2 class="section-title">Private Building Rental</h2>
-        <p style="margin-bottom: 1rem; color: var(--text-muted)">
-          Reserve the entire building for 2 hours! Ideal for birthday parties,
-          family reunions, end-of-season sports banquets, churches, corporate
-          outings, and other private groups. A 50% non-refundable deposit is
-          required at time of reservation. Price covers admission but does not
-          include skate rental or food.
-        </p>
         <div class="card">
-          <div class="slider-row">
-            <label for="rental-guests"
-              >Guest Count <span id="rental-guests-value">Up to 25</span></label
-            >
-            <input
-              type="range"
-              id="rental-guests"
-              min="0"
-              max="10"
-              step="1"
-              value="0"
-            />
-          </div>
-          <div class="stat-grid" style="grid-template-columns: repeat(2, 1fr)">
-            <div>
-              <div class="stat-label">Rental Rate</div>
-              <div class="stat-value" id="rental-rate">$400</div>
+          <div>
+            <div class="card-header">
+              <h3>Private Party</h3>
             </div>
-            <div>
-              <div class="stat-label">Required Deposit (50%)</div>
-              <div class="stat-value" id="rental-deposit">$200</div>
+            <div class="price">$275</div>
+            <div class="deposit-tag">
+              50% Non-Refundable Deposit Required to Reserve
             </div>
+            <ul class="feature-list">
+              <li>Includes up to 10 guests</li>
+              <li>Exclusive use of the rink</li>
+              <li>
+                Includes admission, skate rental, a whole pizza, a bucket of
+                popcorn, plus a pitcher of soda.
+              </li>
+              <li>Parents & Grandparents admitted free</li>
+              <li>
+                Available Time Slots:
+                <ul>
+                  <li>Sundays 5:30pm–7:30pm</li>
+                  <li>Tuesdays 6:30pm–8:30pm</li>
+                  <li>Wednesdays 5:00pm–8:00pm</li>
+                  <li>Fridays 5:00pm–7:30pm</li>
+                  <li>Saturdays 5:30pm–7:30pm</li>
+                </ul>
+              </li>
+              <li>
+                Private parties are 1.5 hours; additional 30 minutes is $75
+              </li>
+              <li>Each additional guest beyond 10: $17</li>
+            </ul>
           </div>
+          <a href="sms:8047986550?&body=Hi%21%20I%27d%20like%20to%20book%20a%20Private%20Party" class="btn">Text to
+            Book</a>
         </div>
-        <div class="section-action">
-          <a
-            href="sms:8047986550?&body=Hi%21%20I%27d%20like%20to%20book%20a%20Building%20Rental"
-            class="btn"
-            >Text to Book</a
-          >
-        </div>
-      </section>
+      </div>
+    </section>
 
-      <section id="fundraiser" style="margin-bottom: 4rem">
-        <h2 class="section-title">Private Fundraiser</h2>
-        <p style="margin-bottom: 1rem; color: var(--text-muted)">
-          Ideal for school PTAs, Boy Scout and Girl Scout troops, American
-          Heritage Girls, youth sports leagues, and local non-profits. Funds
-          raised are 80% of admission revenue above the $375 building rental
-          fee. Drag the sliders below to estimate what your group could raise.
-          You get to decide the admission price. Skate rental is not included
-          in price.
-        </p>
-        <div class="card">
-          <div class="slider-row">
-            <label for="fund-guests"
-              >Guests <span id="fund-guests-value">100</span></label
-            >
-            <input
-              type="range"
-              id="fund-guests"
-              min="25"
-              max="300"
-              step="5"
-              value="100"
-            />
+    <section id="private" style="margin-bottom: 4rem">
+      <h2 class="section-title">Private Building Rental</h2>
+      <p style="margin-bottom: 1rem; color: var(--text-muted)">
+        Reserve the entire building for 2 hours! Ideal for birthday parties,
+        family reunions, end-of-season sports banquets, churches, corporate
+        outings, and other private groups. A 50% non-refundable deposit is
+        required at time of reservation. Price covers admission but does not
+        include skate rental or food.
+      </p>
+      <div class="card">
+        <div class="slider-row">
+          <label for="rental-guests">Guest Count <span id="rental-guests-value">Up to 25</span></label>
+          <input type="range" id="rental-guests" min="0" max="10" step="1" value="0" />
+        </div>
+        <div class="stat-grid" style="grid-template-columns: repeat(2, 1fr)">
+          <div>
+            <div class="stat-label">Rental Rate</div>
+            <div class="stat-value" id="rental-rate">$400</div>
           </div>
-          <div class="slider-row">
-            <label for="fund-price"
-              >Admission You Charge
-              <span id="fund-price-value">$10</span></label
-            >
-            <input
-              type="range"
-              id="fund-price"
-              min="5"
-              max="15"
-              step="1"
-              value="10"
-            />
+          <div>
+            <div class="stat-label">Required Deposit (50%)</div>
+            <div class="stat-value" id="rental-deposit">$200</div>
           </div>
-          <div class="stat-grid" style="grid-template-columns: 1fr">
-            <div>
-              <div class="stat-label">Your Group Raises (Estimate)</div>
-              <div class="stat-value" id="fund-raised" style="font-size: 2rem">
-                $500
-              </div>
+        </div>
+      </div>
+      <div class="section-action">
+        <a href="sms:8047986550?&body=Hi%21%20I%27d%20like%20to%20book%20a%20Building%20Rental" class="btn">Text to
+          Book</a>
+      </div>
+    </section>
+
+    <section id="fundraiser" style="margin-bottom: 4rem">
+      <h2 class="section-title">Private Fundraiser</h2>
+      <p style="margin-bottom: 1rem; color: var(--text-muted)">
+        Ideal for school PTAs, Boy Scout and Girl Scout troops, American
+        Heritage Girls, youth sports leagues, and local non-profits. Funds
+        raised are 80% of admission revenue above the $375 building rental
+        fee. Drag the sliders below to estimate what your group could raise.
+        You get to decide the admission price. Skate rental is not included
+        in price.
+      </p>
+      <div class="card">
+        <div class="slider-row">
+          <label for="fund-guests">Guests <span id="fund-guests-value">100</span></label>
+          <input type="range" id="fund-guests" min="25" max="300" step="5" value="100" />
+        </div>
+        <div class="slider-row">
+          <label for="fund-price">Admission You Charge
+            <span id="fund-price-value">$10</span></label>
+          <input type="range" id="fund-price" min="5" max="15" step="1" value="10" />
+        </div>
+        <div class="stat-grid" style="grid-template-columns: 1fr">
+          <div>
+            <div class="stat-label">Your Group Raises (Estimate)</div>
+            <div class="stat-value" id="fund-raised" style="font-size: 2rem">
+              $500
             </div>
           </div>
-          <p
-            style="
+        </div>
+        <p style="
               font-size: 0.85rem;
               color: var(--text-muted);
               margin-top: 1rem;
               text-align: center;
-            "
-          >
-            Estimate: 80% × (guests × admission − $375 building rental fee)
-          </p>
-        </div>
-        <div class="section-action">
-          <a
-            href="sms:8047986550?&body=Hi%21%20I%27d%20like%20to%20book%20a%20Fundraiser"
-            class="btn"
-            >Text to Book</a
-          >
-        </div>
-      </section>
+            ">
+          Estimate: 80% × (guests × admission − $375 building rental fee)
+        </p>
+      </div>
+      <div class="section-action">
+        <a href="sms:8047986550?&body=Hi%21%20I%27d%20like%20to%20book%20a%20Fundraiser" class="btn">Text to Book</a>
+      </div>
+    </section>
 
-      <section id="classes" style="margin-bottom: 4rem">
-        <h2 class="section-title">Earn Your Medal</h2>
-        <div class="card">
-          <div class="card-header">
-            <h3>Saturday Morning Lessons</h3>
-            <p
-              style="
+    <section id="classes" style="margin-bottom: 4rem">
+      <h2 class="section-title">Earn Your Medal</h2>
+      <div class="card">
+        <div class="card-header">
+          <h3>Saturday Morning Lessons</h3>
+          <p style="
                 color: var(--neon-cyan);
                 font-size: 1.2rem;
                 font-weight: bold;
                 margin-top: 0.5rem;
-              "
-            >
-              $15 per week (Cash or Check Only)
-            </p>
-          </div>
-          <p style="margin-bottom: 1.5rem">
-            Includes the lesson and a regular skate rental.
+              ">
+            $15 per week (Cash or Check Only)
           </p>
-          <div class="grid-3">
-            <div class="medal-item">
-              <div class="medal-badge bronze">B</div>
-              <h4>Bronze &middot; Beginner</h4>
-              <div class="medal-time">10:00 AM</div>
-              <p class="medal-desc">
-                Basic forward movement, posture, stopping, and safety.
-              </p>
-            </div>
-            <div class="medal-item">
-              <div class="medal-badge silver">S</div>
-              <h4>Silver &middot; Intermediate</h4>
-              <div class="medal-time">9:30 AM</div>
-              <p class="medal-desc">
-                Crossovers, backward skating balance, and edge work.
-              </p>
-            </div>
-            <div class="medal-item">
-              <div class="medal-badge gold">G</div>
-              <h4>Gold &middot; Advanced</h4>
-              <div class="medal-time">9:00 AM</div>
-              <p class="medal-desc">
-                Spins, jumps, spread eagles, and figure achievements.
-              </p>
-            </div>
+        </div>
+        <p style="margin-bottom: 1.5rem">
+          Includes the lesson and a regular skate rental.
+        </p>
+        <div class="grid-3">
+          <div class="medal-item">
+            <div class="medal-badge bronze">B</div>
+            <h4>Bronze &middot; Beginner</h4>
+            <div class="medal-time">10:00 AM</div>
+            <p class="medal-desc">
+              Basic forward movement, posture, stopping, and safety.
+            </p>
+          </div>
+          <div class="medal-item">
+            <div class="medal-badge silver">S</div>
+            <h4>Silver &middot; Intermediate</h4>
+            <div class="medal-time">9:30 AM</div>
+            <p class="medal-desc">
+              Crossovers, backward skating balance, and edge work.
+            </p>
+          </div>
+          <div class="medal-item">
+            <div class="medal-badge gold">G</div>
+            <h4>Gold &middot; Advanced</h4>
+            <div class="medal-time">9:00 AM</div>
+            <p class="medal-desc">
+              Spins, jumps, spread eagles, and figure achievements.
+            </p>
           </div>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <section id="reviews" style="margin-bottom: 4rem">
-        <h2 class="section-title">What Skaters Are Saying</h2>
-        <div class="grid-2">
-          <div class="card">
-            <div class="card-header">
-              <h3>Google Reviews</h3>
-            </div>
-            <div class="stat-value" style="font-size: 2.5rem">4.4 ★</div>
-            <p style="color: var(--text-muted)">707 reviews</p>
-            <a
-              href="https://www.google.com/search?gs_ssp=eJzj4tZP1zcsyYnPzck2NGC0UjWosLBMMjS2NE9JNjdPNjVINrUyqEg1NE41TDU2S0oxNTFNMjDyEkwszshJzEtRKM5OLEkFsQDcHRV4&q=ashland+skateland&oq=ashland+skateland&sourceid=chrome&ie=UTF-8"
-              target="_blank"
-              rel="noopener"
-              class="btn"
-              style="margin-top: 1rem"
-              >See Reviews on Google</a
-            >
+    <section id="reviews" style="margin-bottom: 4rem">
+      <h2 class="section-title">What Skaters Are Saying</h2>
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-header">
+            <h3>Google Reviews</h3>
           </div>
-          <div class="card">
-            <div class="card-header">
-              <h3>Facebook Reviews</h3>
-            </div>
-            <div class="stat-value" style="font-size: 2.5rem">4.5 ★</div>
-            <p style="color: var(--text-muted)">80 reviews</p>
-            <a
-              href="https://www.facebook.com/ashland.skateland/"
-              target="_blank"
-              rel="noopener"
-              class="btn"
-              style="margin-top: 1rem"
-              >See Reviews on Facebook</a
-            >
+          <div class="stat-value" style="font-size: 2.5rem">4.4 ★</div>
+          <p style="color: var(--text-muted)">707 reviews</p>
+          <a href="https://www.google.com/search?gs_ssp=eJzj4tZP1zcsyYnPzck2NGC0UjWosLBMMjS2NE9JNjdPNjVINrUyqEg1NE41TDU2S0oxNTFNMjDyEkwszshJzEtRKM5OLEkFsQDcHRV4&q=ashland+skateland&oq=ashland+skateland&sourceid=chrome&ie=UTF-8"
+            target="_blank" rel="noopener" class="btn" style="margin-top: 1rem">See Reviews on Google</a>
+        </div>
+        <div class="card">
+          <div class="card-header">
+            <h3>Facebook Reviews</h3>
+          </div>
+          <div class="stat-value" style="font-size: 2.5rem">4.5 ★</div>
+          <p style="color: var(--text-muted)">80 reviews</p>
+          <a href="https://www.facebook.com/ashland.skateland/" target="_blank" rel="noopener" class="btn"
+            style="margin-top: 1rem">See Reviews on Facebook</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <h2 class="section-title">Location & Contact</h2>
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-header">
+            <h3>Contact Numbers</h3>
+          </div>
+          <p>
+            <strong>Rink Phone:</strong>
+            <a href="tel:8047986550" style="color: var(--neon-cyan)">804-798-6550</a>
+          </p>
+          <p style="display: flex; gap: 0.75rem; margin-top: 1rem">
+            <a href="tel:8047986550" class="btn">Call</a>
+            <a href="sms:8047986550?&body=Hi%21" class="btn">Text</a>
+          </p>
+          <p style="margin-top: 1rem">
+            <strong>Email:</strong>
+            <a href="mailto:AshlandSkateland@gmail.com" style="color: var(--neon-cyan)">AshlandSkateland@gmail.com</a>
+          </p>
+        </div>
+        <div class="card">
+          <div class="card-header">
+            <h3>Address</h3>
+          </div>
+          <p>
+            <strong>Rink Location:</strong><br /><a
+              href="https://www.google.com/maps/dir/?api=1&destination=516+N.+Washington+Hwy,+Ashland,+VA+23005"
+              target="_blank" rel="noopener" style="color: var(--neon-cyan)">516 N. Washington Hwy, Ashland, VA
+              23005</a>
+          </p>
+          <div class="map-embed">
+            <iframe src="https://www.google.com/maps?q=516+N.+Washington+Hwy,+Ashland,+VA+23005&output=embed"
+              width="100%" height="250" style="border: 0" allowfullscreen="" loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade" title="Map to Ashland Skateland"></iframe>
           </div>
         </div>
-      </section>
+      </div>
+    </section>
+  </div>
 
-      <section id="contact">
-        <h2 class="section-title">Location & Contact</h2>
-        <div class="grid-2">
-          <div class="card">
-            <div class="card-header">
-              <h3>Contact Numbers</h3>
-            </div>
-            <p>
-              <strong>Rink Phone:</strong>
-              <a href="tel:8047986550" style="color: var(--neon-cyan)"
-                >804-798-6550</a
-              >
-            </p>
-            <p style="display: flex; gap: 0.75rem; margin-top: 1rem">
-              <a href="tel:8047986550" class="btn">Call</a>
-              <a href="sms:8047986550?&body=Hi%21" class="btn">Text</a>
-            </p>
-            <p style="margin-top: 1rem">
-              <strong>Email:</strong>
-              <a
-                href="mailto:AshlandSkateland@gmail.com"
-                style="color: var(--neon-cyan)"
-                >AshlandSkateland@gmail.com</a
-              >
-            </p>
-          </div>
-          <div class="card">
-            <div class="card-header">
-              <h3>Address</h3>
-            </div>
-            <p>
-              <strong>Rink Location:</strong><br /><a
-                href="https://www.google.com/maps/dir/?api=1&destination=516+N.+Washington+Hwy,+Ashland,+VA+23005"
-                target="_blank"
-                rel="noopener"
-                style="color: var(--neon-cyan)"
-                >516 N. Washington Hwy, Ashland, VA 23005</a
-              >
-            </p>
-            <div class="map-embed">
-              <iframe
-                src="https://www.google.com/maps?q=516+N.+Washington+Hwy,+Ashland,+VA+23005&output=embed"
-                width="100%"
-                height="250"
-                style="border: 0"
-                allowfullscreen=""
-                loading="lazy"
-                referrerpolicy="no-referrer-when-downgrade"
-                title="Map to Ashland Skateland"
-              ></iframe>
-            </div>
-          </div>
-        </div>
-      </section>
-    </div>
+  <footer>
+    <p>&copy; 2026 Ashland Skateland. All Rights Reserved.</p>
+  </footer>
 
-    <footer>
-      <p>&copy; 2026 Ashland Skateland. All Rights Reserved.</p>
-    </footer>
+  <script>
+    // Mirrors the Public Skate Schedule table above — update both if hours change.
+    var SCHEDULE = [
+      [{start: "14:00", end: "16:30", price: 9}], // Sunday — Public Skate
+      [{start: "19:30", end: "22:00", price: 9}], // Monday — Adult Skate (18+)
+      [], // Wednesday — no public sessions
+      [
+        {start: "10:00", end: "12:00", price: 7},
+        {start: "19:00", end: "21:00", price: 7},
+      ], // Thursday — Public Skate, Christian Music Skate
+      [{start: "20:00", end: "22:30", price: 10}], // Friday — Public Skate
+      [
+        {start: "10:30", end: "12:30", price: 8},
+        {start: "14:00", end: "16:30", price: 9},
+        {start: "20:00", end: "22:30", price: 10},
+      ], // Saturday
+    ];
 
-    <script>
-      // Mirrors the Public Skate Schedule table above — update both if hours change.
-      var SCHEDULE = [
-        [{ start: "14:00", end: "16:30", price: 9 }], // Sunday — Public Skate
-        [{ start: "19:30", end: "22:00", price: 9 }], // Monday — Adult Skate (18+)
-        [{ start: "19:00", end: "21:00", price: 7 }], // Tuesday — Public Skate
-        [], // Wednesday — no public sessions
-        [
-          { start: "10:00", end: "12:00", price: 7 },
-          { start: "19:00", end: "21:00", price: 7 },
-        ], // Thursday — Public Skate, Christian Music Skate
-        [{ start: "20:00", end: "22:30", price: 10 }], // Friday — Public Skate
-        [
-          { start: "10:30", end: "12:30", price: 8 },
-          { start: "14:00", end: "16:30", price: 9 },
-          { start: "20:00", end: "22:30", price: 10 },
-        ], // Saturday
-      ];
+    function pad(n) {
+      return String(n).padStart(2, "0");
+    }
 
-      function pad(n) {
-        return String(n).padStart(2, "0");
+    function parseTime(str) {
+      return str.split(":").map(Number);
+    }
+
+    function atTime(date, hhmm) {
+      var parts = parseTime(hhmm);
+      var d = new Date(date);
+      d.setHours(parts[0], parts[1], 0, 0);
+      return d;
+    }
+
+    function formatTime12(date) {
+      var h = date.getHours();
+      var m = date.getMinutes();
+      var ampm = h >= 12 ? "PM" : "AM";
+      h = h % 12;
+      if (h === 0) h = 12;
+      return h + ":" + pad(m) + " " + ampm;
+    }
+
+    function formatCountdown(ms) {
+      if (ms <= 0) return "00:00:00";
+      var totalSeconds = Math.floor(ms / 1000);
+      var days = Math.floor(totalSeconds / 86400);
+      var hours = Math.floor((totalSeconds % 86400) / 3600);
+      var minutes = Math.floor((totalSeconds % 3600) / 60);
+      var seconds = totalSeconds % 60;
+      var hms = pad(hours) + ":" + pad(minutes) + ":" + pad(seconds);
+      return days > 0 ? days + "d " + hms : hms;
+    }
+
+    function findSession(now) {
+      var todaySessions = SCHEDULE[now.getDay()];
+      for (var i = 0; i < todaySessions.length; i++) {
+        var s = todaySessions[i];
+        var start = atTime(now, s.start);
+        var end = atTime(now, s.end);
+        if (now >= start && now < end) {
+          return {type: "open", session: s, start: start, end: end, dayOffset: 0};
+        }
       }
-
-      function parseTime(str) {
-        return str.split(":").map(Number);
-      }
-
-      function atTime(date, hhmm) {
-        var parts = parseTime(hhmm);
-        var d = new Date(date);
-        d.setHours(parts[0], parts[1], 0, 0);
-        return d;
-      }
-
-      function formatTime12(date) {
-        var h = date.getHours();
-        var m = date.getMinutes();
-        var ampm = h >= 12 ? "PM" : "AM";
-        h = h % 12;
-        if (h === 0) h = 12;
-        return h + ":" + pad(m) + " " + ampm;
-      }
-
-      function formatCountdown(ms) {
-        if (ms <= 0) return "00:00:00";
-        var totalSeconds = Math.floor(ms / 1000);
-        var days = Math.floor(totalSeconds / 86400);
-        var hours = Math.floor((totalSeconds % 86400) / 3600);
-        var minutes = Math.floor((totalSeconds % 3600) / 60);
-        var seconds = totalSeconds % 60;
-        var hms = pad(hours) + ":" + pad(minutes) + ":" + pad(seconds);
-        return days > 0 ? days + "d " + hms : hms;
-      }
-
-      function findSession(now) {
-        var todaySessions = SCHEDULE[now.getDay()];
-        for (var i = 0; i < todaySessions.length; i++) {
-          var s = todaySessions[i];
-          var start = atTime(now, s.start);
-          var end = atTime(now, s.end);
-          if (now >= start && now < end) {
-            return { type: "open", session: s, start: start, end: end, dayOffset: 0 };
+      for (var offset = 0; offset <= 7; offset++) {
+        var d = new Date(now);
+        d.setDate(d.getDate() + offset);
+        var sessions = SCHEDULE[d.getDay()];
+        for (var j = 0; j < sessions.length; j++) {
+          var sess = sessions[j];
+          var sessStart = atTime(d, sess.start);
+          if (sessStart > now) {
+            return {
+              type: "upcoming",
+              session: sess,
+              start: sessStart,
+              end: atTime(d, sess.end),
+              dayOffset: offset,
+            };
           }
         }
-        for (var offset = 0; offset <= 7; offset++) {
-          var d = new Date(now);
-          d.setDate(d.getDate() + offset);
-          var sessions = SCHEDULE[d.getDay()];
-          for (var j = 0; j < sessions.length; j++) {
-            var sess = sessions[j];
-            var sessStart = atTime(d, sess.start);
-            if (sessStart > now) {
-              return {
-                type: "upcoming",
-                session: sess,
-                start: sessStart,
-                end: atTime(d, sess.end),
-                dayOffset: offset,
-              };
-            }
-          }
-        }
-        return null;
       }
+      return null;
+    }
 
-      function nextSkateLabel(result) {
-        if (result.type === "open") return "Now";
-        if (result.dayOffset === 0) return "Today";
-        if (result.dayOffset === 1) return "Tomorrow";
-        return result.start.toLocaleDateString("en-US", { weekday: "long" });
-      }
+    function nextSkateLabel(result) {
+      if (result.type === "open") return "Now";
+      if (result.dayOffset === 0) return "Today";
+      if (result.dayOffset === 1) return "Tomorrow";
+      return result.start.toLocaleDateString("en-US", {weekday: "long"});
+    }
 
-      function updateTodaySession() {
-        var now = new Date();
-        var result = findSession(now);
-        if (!result) return;
+    function updateTodaySession() {
+      var now = new Date();
+      var result = findSession(now);
+      if (!result) return;
 
-        document.getElementById("today-next").textContent = nextSkateLabel(result);
-        document.getElementById("today-doors").textContent = formatTime12(result.start);
-        document.getElementById("today-admission").textContent = "$" + result.session.price;
+      document.getElementById("today-next").textContent = nextSkateLabel(result);
+      document.getElementById("today-doors").textContent = formatTime12(result.start);
+      document.getElementById("today-admission").textContent = "$" + result.session.price;
 
-        var countdownTarget = result.type === "open" ? result.end : result.start;
-        var countdownLabel = result.type === "open" ? "Floor Is Open — Ends In" : "Doors Open In";
-        document.getElementById("today-countdown-label").textContent = countdownLabel;
-        document.getElementById("today-timer").textContent = formatCountdown(countdownTarget - now);
-      }
+      var countdownTarget = result.type === "open" ? result.end : result.start;
+      var countdownLabel = result.type === "open" ? "Floor Is Open — Ends In" : "Doors Open In";
+      document.getElementById("today-countdown-label").textContent = countdownLabel;
+      document.getElementById("today-timer").textContent = formatCountdown(countdownTarget - now);
+    }
 
-      function highlightCurrentDay() {
-        var today = new Date().getDay();
-        document.querySelectorAll("#schedule tbody tr").forEach(function (row) {
-          var isToday = Number(row.getAttribute("data-day")) === today;
-          row.classList.toggle("current-day", isToday);
-        });
-      }
+    function highlightCurrentDay() {
+      var today = new Date().getDay();
+      document.querySelectorAll("#schedule tbody tr").forEach(function (row) {
+        var isToday = Number(row.getAttribute("data-day")) === today;
+        row.classList.toggle("current-day", isToday);
+      });
+    }
 
+    updateTodaySession();
+    highlightCurrentDay();
+    setInterval(function () {
       updateTodaySession();
       highlightCurrentDay();
-      setInterval(function () {
-        updateTodaySession();
-        highlightCurrentDay();
-      }, 1000);
+    }, 1000);
 
-      // Mirrors the Private Building Rental table above — update both if rates change.
-      var RENTAL_TIERS = [
-        { guests: 25, rate: 400, deposit: 200 },
-        { guests: 50, rate: 475, deposit: 237.5 },
-        { guests: 75, rate: 550, deposit: 275 },
-        { guests: 100, rate: 625, deposit: 312.5 },
-        { guests: 150, rate: 775, deposit: 387.5 },
-        { guests: 200, rate: 925, deposit: 462.5 },
-        { guests: 300, rate: 1225, deposit: 612.5 },
-        { guests: 400, rate: 1525, deposit: 762.5 },
-        { guests: 500, rate: 1825, deposit: 912.5 },
-        { guests: 600, rate: 2125, deposit: 1062.5 },
-        { guests: 700, rate: 2425, deposit: 1212.5 },
-      ];
+    // Mirrors the Private Building Rental table above — update both if rates change.
+    var RENTAL_TIERS = [
+      {guests: 25, rate: 400, deposit: 200},
+      {guests: 50, rate: 475, deposit: 237.5},
+      {guests: 75, rate: 550, deposit: 275},
+      {guests: 100, rate: 625, deposit: 312.5},
+      {guests: 150, rate: 775, deposit: 387.5},
+      {guests: 200, rate: 925, deposit: 462.5},
+      {guests: 300, rate: 1225, deposit: 612.5},
+      {guests: 400, rate: 1525, deposit: 762.5},
+      {guests: 500, rate: 1825, deposit: 912.5},
+      {guests: 600, rate: 2125, deposit: 1062.5},
+      {guests: 700, rate: 2425, deposit: 1212.5},
+    ];
 
-      function formatMoney(n) {
-        return (
-          "$" +
-          n.toLocaleString("en-US", {
-            minimumFractionDigits: n % 1 === 0 ? 0 : 2,
-            maximumFractionDigits: 2,
-          })
-        );
-      }
+    function formatMoney(n) {
+      return (
+        "$" +
+        n.toLocaleString("en-US", {
+          minimumFractionDigits: n % 1 === 0 ? 0 : 2,
+          maximumFractionDigits: 2,
+        })
+      );
+    }
 
-      function updateRentalSlider() {
-        var tier = RENTAL_TIERS[Number(document.getElementById("rental-guests").value)];
-        document.getElementById("rental-guests-value").textContent = "Up to " + tier.guests;
-        document.getElementById("rental-rate").textContent = formatMoney(tier.rate);
-        document.getElementById("rental-deposit").textContent = formatMoney(tier.deposit);
-      }
+    function updateRentalSlider() {
+      var tier = RENTAL_TIERS[Number(document.getElementById("rental-guests").value)];
+      document.getElementById("rental-guests-value").textContent = "Up to " + tier.guests;
+      document.getElementById("rental-rate").textContent = formatMoney(tier.rate);
+      document.getElementById("rental-deposit").textContent = formatMoney(tier.deposit);
+    }
 
-      document.getElementById("rental-guests").addEventListener("input", updateRentalSlider);
-      updateRentalSlider();
+    document.getElementById("rental-guests").addEventListener("input", updateRentalSlider);
+    updateRentalSlider();
 
-      // Formula mirrors the Private Fundraiser pricing described above: 80% of admission revenue above the $375 building rental fee.
-      function updateFundraiserSliders() {
-        var guests = Number(document.getElementById("fund-guests").value);
-        var price = Number(document.getElementById("fund-price").value);
-        document.getElementById("fund-guests-value").textContent = guests;
-        document.getElementById("fund-price-value").textContent = "$" + price;
-        var raised = Math.max(0, Math.round(0.8 * (guests * price - 375)));
-        document.getElementById("fund-raised").textContent = "$" + raised.toLocaleString("en-US");
-      }
+    // Formula mirrors the Private Fundraiser pricing described above: 80% of admission revenue above the $375 building rental fee.
+    function updateFundraiserSliders() {
+      var guests = Number(document.getElementById("fund-guests").value);
+      var price = Number(document.getElementById("fund-price").value);
+      document.getElementById("fund-guests-value").textContent = guests;
+      document.getElementById("fund-price-value").textContent = "$" + price;
+      var raised = Math.max(0, Math.round(0.8 * (guests * price - 375)));
+      document.getElementById("fund-raised").textContent = "$" + raised.toLocaleString("en-US");
+    }
 
-      document.getElementById("fund-guests").addEventListener("input", updateFundraiserSliders);
-      document.getElementById("fund-price").addEventListener("input", updateFundraiserSliders);
-      updateFundraiserSliders();
+    document.getElementById("fund-guests").addEventListener("input", updateFundraiserSliders);
+    document.getElementById("fund-price").addEventListener("input", updateFundraiserSliders);
+    updateFundraiserSliders();
 
-      // Keeps anchor-link scrolling from landing a heading underneath the sticky header,
-      // whose height varies (e.g. nav wraps to multiple lines on narrow screens).
-      function syncHeaderHeight() {
-        var header = document.querySelector("header");
-        if (!header) return;
-        document.documentElement.style.setProperty(
-          "--header-height",
-          header.offsetHeight + 16 + "px"
-        );
-      }
-      syncHeaderHeight();
-      window.addEventListener("resize", syncHeaderHeight);
-    </script>
-  </body>
+    // Keeps anchor-link scrolling from landing a heading underneath the sticky header,
+    // whose height varies (e.g. nav wraps to multiple lines on narrow screens).
+    function syncHeaderHeight() {
+      var header = document.querySelector("header");
+      if (!header) return;
+      document.documentElement.style.setProperty(
+        "--header-height",
+        header.offsetHeight + 16 + "px"
+      );
+    }
+    syncHeaderHeight();
+    window.addEventListener("resize", syncHeaderHeight);
+  </script>
+</body>
+
 </html>
