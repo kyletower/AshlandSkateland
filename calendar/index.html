@@ -179,7 +179,8 @@
         border-left: 3px solid var(--neon-cyan);
         padding-left: 0.4rem;
       }
-      .session-special {
+      .session-special,
+      .session-private-party {
         border-left-color: var(--neon-pink);
       }
       .session-time {
@@ -548,7 +549,10 @@
           } else if (info.sessions && info.sessions.length) {
             var list = makeEl("div", "day-sessions");
             info.sessions.forEach(function (s) {
-              var item = makeEl("div", "session" + (s.special ? " session-special" : ""));
+              var itemClass = "session";
+              if (s.special) itemClass += " session-special";
+              if (s.label === "Book Your Private Party") itemClass += " session-private-party";
+              var item = makeEl("div", itemClass);
               item.appendChild(
                 makeEl(
                   "div",
