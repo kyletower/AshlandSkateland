@@ -401,7 +401,7 @@
       // (../index.html) — keep all three in sync if public skate hours change.
       var CALENDAR = {
         year: 2026,
-        month: 9, // 0 = January, 9 = October
+        month: 10, // 0 = January, 10 = November
         eyebrow: "Skate Sessions Schedule",
         promo:
           "Fall into Fun at the Rink! Book birthday parties, private rentals, and beginner classes at ashlandskateland.com",
@@ -410,7 +410,9 @@
       };
 
       var WEEKLY_SCHEDULE = [
-        [{ start: "14:00", end: "16:30", price: 9, label: "Public Skate" }], // Sunday
+        [{ start: "14:00", end: "16:30", price: 9, label: "Public Skate" },
+          { start: "17:30", end: "19:30", price: 275, label: "Book Your Private Party" },
+        ], // Sunday
         [
           {
             start: "19:30",
@@ -419,16 +421,20 @@
             label: "Adult Skate (18+)",
           },
         ], // Monday
-        [{ start: "19:00", end: "21:00", price: 7, label: "Public Skate" }], // Tuesday
-        [], // Wednesday — no public sessions
+        [{ start: "18:30", end: "20:30", price: 275, label: "Book Your Private Party" }], // Tuesday — no public sessions
+        [{ start: "17:00", end: "20:30", price: 275, label: "Book Your Private Party" }], // Wednesday — no public sessions
         [
           { start: "10:00", end: "12:00", price: 7, label: "Public Skate" },
           { start: "19:00", end: "21:00", price: 7, label: "Christian Music" },
         ], // Thursday
-        [{ start: "20:00", end: "22:30", price: 10, label: "Public Skate" }], // Friday
+        [
+          { start: "17:00", end: "19:00", price: 10, label: "Book Your Private Party" },
+          { start: "20:00", end: "22:30", price: 10, label: "Public Skate" }
+        ], // Friday
         [
           { start: "10:30", end: "12:30", price: 8, label: "Public Skate" },
           { start: "14:00", end: "16:30", price: 9, label: "Public Skate" },
+          { start: "17:00", end: "19:00", price: 10, label: "Book Your Private Party" },
           { start: "20:00", end: "22:30", price: 10, label: "Public Skate" },
         ], // Saturday
       ];
@@ -438,26 +444,7 @@
       // { sessions: [...] } to fully replace that day's normal sessions
       // (e.g. renaming a slot for a themed skate night). Add `special: true`
       // to a session to highlight it.
-      var OVERRIDES = {
-        "2026-10-12": { closed: true, reason: "Construction", note: "RINK CLOSED" },
-        "2026-10-13": { closed: true, reason: "Construction", note: "RINK CLOSED" },
-        "2026-10-14": { closed: true, reason: "Construction", note: "RINK CLOSED" },
-        "2026-10-15": { closed: true, reason: "Construction", note: "RINK CLOSED" },
-        "2026-10-16": { closed: true, reason: "Construction", note: "RINK CLOSED" },
-        "2026-10-31": {
-          sessions: [
-            { start: "10:30", end: "12:30", price: 8, label: "Public Skate" },
-            { start: "14:00", end: "16:30", price: 9, label: "Public Skate" },
-            {
-              start: "20:00",
-              end: "22:30",
-              price: 10,
-              label: "🎃 Halloween Skate",
-              special: true,
-            },
-          ],
-        },
-      };
+      var OVERRIDES = {};
 
       // --- Rendering --------------------------------------------------------
       var DOW_NAMES = [
