@@ -183,6 +183,13 @@
       .session-private-party {
         border-left-color: var(--neon-pink);
       }
+      .session-booked {
+        border-left-color: var(--text-muted);
+        opacity: 0.7;
+      }
+      .session-booked .session-label {
+        font-style: italic;
+      }
       .session-time {
         font-size: 0.78rem;
         font-weight: bold;
@@ -340,8 +347,12 @@
         .session {
           border-left-color: #666;
         }
-        .session-special {
+        .session-special,
+        .session-private-party {
           border-left-color: #b5472e;
+        }
+        .session-booked {
+          border-left-color: #999;
         }
         .calendar-day.closed {
           background: #f4e4e4 !important;
@@ -410,6 +421,11 @@
           "Schedule subject to change · Visit ashlandskateland.com for details",
       };
 
+      // The one date this month a "Book Your Private Party" slot can still be
+      // booked; every other private-party slot on the calendar renders as
+      // "Private Party Booked!" instead. Set to null to show every slot as booked.
+      var PRIVATE_PARTY_AVAILABLE_DATE = "2026-11-11";
+
       var WEEKLY_SCHEDULE = [
         [{ start: "14:00", end: "16:30", price: 9, label: "Public Skate" },
           { start: "17:30", end: "19:30", price: 275, label: "Book Your Private Party" },
@@ -435,7 +451,7 @@
         [
           { start: "10:30", end: "12:30", price: 8, label: "Public Skate" },
           { start: "14:00", end: "16:30", price: 9, label: "Public Skate" },
-          { start: "17:00", end: "19:00", price: 10, label: "Book Your Private Party" },
+          { start: "17:00", end: "19:00", price: 275, label: "Book Your Private Party" },
           { start: "20:00", end: "22:30", price: 10, label: "Public Skate" },
         ], // Saturday
       ];
@@ -445,7 +461,52 @@
       // { sessions: [...] } to fully replace that day's normal sessions
       // (e.g. renaming a slot for a themed skate night). Add `special: true`
       // to a session to highlight it.
-      var OVERRIDES = {};
+      var OVERRIDES = {
+        "2026-11-03": {
+          sessions: [
+            { start: "12:30", end: "14:30", price: 9, label: "Public Skate" },
+            { start: "18:30", end: "20:30", price: 275, label: "Book Your Private Party" },
+          ],
+        },
+        "2026-11-20": {
+          sessions: [
+            { start: "11:00", end: "13:00", label: "King William PE Class", special: true },
+            { start: "17:00", end: "19:00", price: 275, label: "Book Your Private Party" },
+            { start: "20:00", end: "22:30", price: 10, label: "Public Skate" },
+          ],
+        },
+        "2026-11-23": {
+          sessions: [
+            { start: "12:30", end: "14:30", price: 9, label: "Public Skate" },
+            { start: "19:30", end: "22:00", price: 9, label: "Adult Skate (18+)" },
+          ],
+        },
+        "2026-11-24": {
+          sessions: [
+            { start: "12:30", end: "14:30", price: 9, label: "Public Skate" },
+            { start: "18:30", end: "20:30", price: 275, label: "Book Your Private Party" },
+          ],
+        },
+        "2026-11-25": {
+          sessions: [
+            { start: "12:30", end: "14:30", price: 9, label: "Public Skate" },
+            { start: "17:00", end: "20:30", price: 275, label: "Book Your Private Party" },
+          ],
+        },
+        "2026-11-26": {
+          closed: true,
+          reason: "Thanksgiving",
+          note: "RINK CLOSED",
+          icon: "🦃",
+        },
+        "2026-11-27": {
+          sessions: [
+            { start: "12:30", end: "14:30", price: 5, label: "Cheap Skate: Black Friday", special: true },
+            { start: "17:00", end: "19:00", price: 275, label: "Book Your Private Party" },
+            { start: "20:00", end: "22:30", price: 10, label: "Public Skate" },
+          ],
+        },
+      };
 
       // --- Rendering --------------------------------------------------------
       var DOW_NAMES = [
@@ -479,12 +540,30 @@
       function sessionsForDate(year, month, day) {
         var override = OVERRIDES[dateKey(year, month, day)];
         if (override && override.closed) {
-          return { closed: true, reason: override.reason, note: override.note };
+          return {
+            closed: true,
+            reason: override.reason,
+            note: override.note,
+            icon: override.icon,
+          };
         }
         if (override && override.sessions) {
           return { sessions: override.sessions };
         }
         return { sessions: WEEKLY_SCHEDULE[new Date(year, month, day).getDay()] };
+      }
+
+      // Marks every "Book Your Private Party" session as booked except on
+      // PRIVATE_PARTY_AVAILABLE_DATE, so individual days don't need to repeat
+      // that logic in their own overrides. Tuesdays are always left bookable.
+      function applyPrivatePartyStatus(sessions, key, dow) {
+        if (dow === 2) return sessions;
+        return sessions.map(function (s) {
+          if (s.label !== "Book Your Private Party" || key === PRIVATE_PARTY_AVAILABLE_DATE) {
+            return s;
+          }
+          return { start: s.start, end: s.end, label: "Private Party Booked!", booked: true };
+        });
       }
 
       function makeEl(tag, className, text) {
@@ -529,6 +608,13 @@
 
         for (var day = 1; day <= daysInMonth; day++) {
           var info = sessionsForDate(year, month, day);
+          if (info.sessions) {
+            info.sessions = applyPrivatePartyStatus(
+              info.sessions,
+              dateKey(year, month, day),
+              new Date(year, month, day).getDay()
+            );
+          }
           var cell = makeEl("div", "calendar-day" + (info.closed ? " closed" : ""));
           if (isCurrentMonth && today.getDate() === day) {
             cell.classList.add("today");
@@ -543,7 +629,9 @@
 
           if (info.closed) {
             var closedBox = makeEl("div", "day-closed");
-            closedBox.appendChild(makeEl("div", "closed-reason", "🚧 " + info.reason));
+            closedBox.appendChild(
+              makeEl("div", "closed-reason", (info.icon || "🚧") + " " + info.reason)
+            );
             closedBox.appendChild(makeEl("div", "closed-note", info.note));
             cell.appendChild(closedBox);
           } else if (info.sessions && info.sessions.length) {
@@ -551,7 +639,8 @@
             info.sessions.forEach(function (s) {
               var itemClass = "session";
               if (s.special) itemClass += " session-special";
-              if (s.label === "Book Your Private Party") itemClass += " session-private-party";
+              if (s.booked) itemClass += " session-booked";
+              else if (s.label === "Book Your Private Party") itemClass += " session-private-party";
               var item = makeEl("div", itemClass);
               item.appendChild(
                 makeEl(
@@ -561,7 +650,11 @@
                 )
               );
               item.appendChild(
-                makeEl("div", "session-label", s.label + " · $" + s.price)
+                makeEl(
+                  "div",
+                  "session-label",
+                  s.price != null ? s.label + " · $" + s.price : s.label
+                )
               );
               list.appendChild(item);
             });
