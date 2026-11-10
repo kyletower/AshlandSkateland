@@ -1,0 +1,888 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ashland Skateland | Book a Party</title>
+    <style>
+      :root {
+        --bg-black-magic: #1b1b1b;
+        --card-bg: #262626;
+        --text-main: #f0f0f0;
+        --text-muted: #aaaaaa;
+        --neon-cyan: #3ff0ff;
+        --neon-pink: #d6336c;
+        --border-color: #333333;
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        background-color: var(--bg-black-magic);
+        color: var(--text-main);
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+          Arial, sans-serif;
+        line-height: 1.6;
+      }
+
+      header {
+        text-align: center;
+        padding: 1rem;
+        border-bottom: 3px solid var(--neon-pink);
+      }
+      .brand {
+        font-weight: 900;
+        text-transform: uppercase;
+        letter-spacing: 0.03em;
+        text-shadow:
+          0 0 6px var(--neon-cyan),
+          0 0 16px var(--neon-pink);
+      }
+      header .brand {
+        font-size: clamp(1.25rem, 5vw, 1.75rem);
+      }
+      .back-nav {
+        margin-top: 0.5rem;
+        display: flex;
+        justify-content: center;
+        gap: 1.25rem;
+      }
+      .back-nav a {
+        color: var(--neon-cyan);
+        text-decoration: none;
+        font-size: 0.9rem;
+        font-weight: 600;
+      }
+      .back-nav a:hover {
+        text-decoration: underline;
+      }
+
+      main.booking-page {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 1.5rem 1rem 4rem;
+      }
+
+      .steps-nav {
+        display: flex;
+        justify-content: center;
+        gap: 0.5rem;
+        margin-bottom: 1.5rem;
+        flex-wrap: wrap;
+      }
+      .step-pill {
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        padding: 0.3rem 0.8rem;
+        border-radius: 999px;
+        border: 1px solid var(--border-color);
+        color: var(--text-muted);
+      }
+      .step-pill.active {
+        border-color: var(--neon-pink);
+        color: var(--neon-pink);
+        font-weight: bold;
+      }
+      .step-pill.done {
+        border-color: var(--neon-cyan);
+        color: var(--neon-cyan);
+      }
+
+      .booking-step {
+        display: none;
+      }
+      .booking-step.active {
+        display: block;
+      }
+
+      h2.step-title {
+        font-size: 1.4rem;
+        text-transform: uppercase;
+        margin-bottom: 1rem;
+        text-align: center;
+      }
+      p.step-subtitle {
+        color: var(--text-muted);
+        text-align: center;
+        max-width: 560px;
+        margin: 0 auto 1.5rem;
+      }
+
+      .grid-2 {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 1.25rem;
+      }
+
+      .card {
+        background-color: var(--card-bg);
+        border-radius: 8px;
+        padding: 1.25rem;
+        border: 1px solid var(--border-color);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+      .card h3 {
+        color: var(--neon-pink);
+        font-size: 1.15rem;
+        margin-bottom: 0.4rem;
+      }
+      .card .price {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: var(--neon-cyan);
+        margin-bottom: 0.5rem;
+      }
+      .card p.desc {
+        color: var(--text-muted);
+        font-size: 0.9rem;
+        margin-bottom: 1rem;
+      }
+
+      .btn {
+        display: inline-block;
+        background-color: var(--neon-pink);
+        color: #fff;
+        padding: 0.65rem 1.25rem;
+        border: none;
+        border-radius: 4px;
+        text-decoration: none;
+        font-weight: bold;
+        text-transform: uppercase;
+        text-align: center;
+        cursor: pointer;
+        font-size: 0.9rem;
+        font-family: inherit;
+        transition: background 0.2s;
+      }
+      .btn:hover {
+        background-color: #d6006b;
+      }
+      .btn:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+      .btn-secondary {
+        background: transparent;
+        border: 1px solid var(--neon-cyan);
+        color: var(--neon-cyan);
+      }
+      .btn-secondary:hover {
+        background: rgba(63, 240, 255, 0.1);
+      }
+      .btn-back {
+        background: transparent;
+        color: var(--text-muted);
+        border: none;
+        text-decoration: underline;
+        cursor: pointer;
+        font-family: inherit;
+        font-size: 0.85rem;
+        margin-bottom: 1rem;
+      }
+
+      /* Calendar/slot picker — same visual language as /calendar/ */
+      .calendar-nav {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+        margin-bottom: 1rem;
+      }
+      .calendar-nav button {
+        background: var(--card-bg);
+        border: 1px solid var(--border-color);
+        color: var(--neon-cyan);
+        border-radius: 4px;
+        padding: 0.4rem 0.8rem;
+        cursor: pointer;
+        font-family: inherit;
+      }
+      .calendar-nav .month-label {
+        font-weight: bold;
+        text-transform: uppercase;
+        min-width: 160px;
+        text-align: center;
+      }
+
+      .calendar {
+        background: var(--card-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 10px;
+        overflow: hidden;
+      }
+      .calendar-grid {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+      }
+      .calendar-dow {
+        background: #333;
+        color: var(--neon-cyan);
+        text-transform: uppercase;
+        font-size: 0.75rem;
+        font-weight: bold;
+        text-align: center;
+        padding: 0.5rem 0.25rem;
+        border-bottom: 1px solid var(--border-color);
+      }
+      .calendar-day {
+        min-height: 90px;
+        border-right: 1px solid var(--border-color);
+        border-bottom: 1px solid var(--border-color);
+        padding: 0.4rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.3rem;
+      }
+      .calendar-day.empty {
+        background: rgba(255, 255, 255, 0.02);
+      }
+      .calendar-day.past {
+        opacity: 0.4;
+      }
+      .day-number {
+        font-weight: bold;
+        color: var(--text-muted);
+        font-size: 0.85rem;
+      }
+      .slot-btn {
+        display: block;
+        width: 100%;
+        background: transparent;
+        border: 1px solid var(--neon-cyan);
+        color: var(--neon-cyan);
+        border-radius: 4px;
+        font-size: 0.72rem;
+        padding: 0.25rem 0.3rem;
+        cursor: pointer;
+        font-family: inherit;
+        text-align: left;
+      }
+      .slot-btn:hover {
+        background: rgba(63, 240, 255, 0.12);
+      }
+      .slot-btn.full {
+        border-color: var(--text-muted);
+        color: var(--text-muted);
+        cursor: not-allowed;
+        text-decoration: line-through;
+      }
+      @media (max-width: 700px) {
+        .calendar-grid {
+          grid-template-columns: 1fr;
+        }
+        .calendar-dow {
+          display: none;
+        }
+        .calendar-day.empty {
+          display: none;
+        }
+        .calendar-day {
+          min-height: 0;
+          border-right: none;
+        }
+      }
+
+      /* Booking form */
+      form.booking-form {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+      }
+      form.booking-form .full {
+        grid-column: 1 / -1;
+      }
+      form.booking-form label {
+        display: flex;
+        flex-direction: column;
+        font-size: 0.85rem;
+        gap: 0.35rem;
+        color: var(--text-muted);
+      }
+      form.booking-form input,
+      form.booking-form select,
+      form.booking-form textarea {
+        background: var(--card-bg);
+        border: 1px solid var(--border-color);
+        color: var(--text-main);
+        border-radius: 4px;
+        padding: 0.6rem;
+        font-size: 0.95rem;
+        font-family: inherit;
+      }
+      form.booking-form input[type="checkbox"] {
+        width: auto;
+      }
+      .conditional-fields {
+        grid-column: 1 / -1;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+      }
+      .conditional-fields.hidden {
+        display: none;
+      }
+      @media (max-width: 600px) {
+        form.booking-form,
+        .conditional-fields {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .selected-slot-banner {
+        background: var(--card-bg);
+        border: 1px solid var(--neon-cyan);
+        border-radius: 8px;
+        padding: 0.75rem 1rem;
+        margin-bottom: 1.25rem;
+        font-size: 0.9rem;
+      }
+      .selected-slot-banner strong {
+        color: var(--neon-cyan);
+      }
+
+      .confirmation-box {
+        background: var(--card-bg);
+        border: 1px solid var(--neon-cyan);
+        border-radius: 8px;
+        padding: 2rem;
+        text-align: center;
+      }
+      .confirmation-box.flagged {
+        border-color: var(--neon-pink);
+      }
+      .confirmation-box h3 {
+        color: var(--neon-cyan);
+        margin-bottom: 0.75rem;
+        font-size: 1.3rem;
+      }
+      .confirmation-box.flagged h3 {
+        color: var(--neon-pink);
+      }
+      .error-banner {
+        background: rgba(214, 51, 108, 0.12);
+        border: 1px solid var(--neon-pink);
+        color: var(--text-main);
+        border-radius: 6px;
+        padding: 0.75rem 1rem;
+        margin-bottom: 1rem;
+        font-size: 0.9rem;
+      }
+      .hidden {
+        display: none !important;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <span class="brand">Ashland Skateland</span>
+      <nav class="back-nav">
+        <a href="/">&larr; Home</a>
+        <a href="/calendar/">Calendar</a>
+        <a href="/menu/">Menu</a>
+      </nav>
+    </header>
+
+    <main class="booking-page">
+      <div class="steps-nav">
+        <span class="step-pill" data-step-pill="1">1. Package</span>
+        <span class="step-pill" data-step-pill="2">2. Date &amp; Time</span>
+        <span class="step-pill" data-step-pill="3">3. Your Info</span>
+        <span class="step-pill" data-step-pill="4">4. Confirmation</span>
+      </div>
+
+      <!-- Step 1: Package selection -->
+      <section class="booking-step" id="step-1" data-step="1">
+        <h2 class="step-title">Choose a Package</h2>
+        <p class="step-subtitle">
+          Pick the kind of event you're planning. Prices and details match the
+          <a href="/#parties" style="color: var(--neon-cyan)">packages described on our home page</a>.
+        </p>
+        <div class="grid-2">
+          <div class="card">
+            <div>
+              <h3>Public Birthday Party</h3>
+              <div class="price">$200</div>
+              <p class="desc">
+                During any Public Skate session. Includes 10 guests (admission,
+                skate rental, drinks, popcorn). $13 per additional guest.
+              </p>
+            </div>
+            <button class="btn" data-package="public_birthday" data-category="public">Select &amp; Check Availability</button>
+          </div>
+          <div class="card">
+            <div>
+              <h3>Private Birthday Party</h3>
+              <div class="price">$275</div>
+              <p class="desc">
+                1.5 hours, exclusive use of the rink. Includes 10 guests + pizza +
+                a pitcher of soda. $17 per additional guest; +$75 for 30 extra minutes.
+              </p>
+            </div>
+            <button class="btn" data-package="private_birthday" data-category="private">Select &amp; Check Availability</button>
+          </div>
+          <div class="card">
+            <div>
+              <h3>Private Facility Rental</h3>
+              <div class="price">From $400</div>
+              <p class="desc">
+                2 hours, the whole building to yourselves. Price covers admission;
+                skate rental is extra. Final pricing depends on guest count — our
+                staff will follow up to confirm.
+              </p>
+            </div>
+            <button class="btn" data-package="private_facility_rental" data-category="private">Select &amp; Check Availability</button>
+          </div>
+          <div class="card">
+            <div>
+              <h3>Private Fundraiser</h3>
+              <div class="price">$375</div>
+              <p class="desc">
+                2 hours, skate rental extra. For school PTAs, scout troops, and
+                local non-profits. Our staff will follow up to finalize admission
+                pricing and payout details.
+              </p>
+            </div>
+            <button class="btn" data-package="private_fundraiser" data-category="private">Select &amp; Check Availability</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Step 2: Live slot picker -->
+      <section class="booking-step" id="step-2" data-step="2">
+        <button class="btn-back" data-back-to="1">&larr; Change package</button>
+        <h2 class="step-title">Pick a Date &amp; Time</h2>
+        <p class="step-subtitle" id="step-2-subtitle"></p>
+        <p id="step-2-error" class="error-banner hidden"></p>
+        <div class="calendar-nav">
+          <button id="prev-month" type="button">&larr;</button>
+          <span class="month-label" id="month-label">—</span>
+          <button id="next-month" type="button">&rarr;</button>
+        </div>
+        <div class="calendar">
+          <div class="calendar-grid" id="calendar-grid"></div>
+        </div>
+      </section>
+
+      <!-- Step 3: Package-specific form -->
+      <section class="booking-step" id="step-3" data-step="3">
+        <button class="btn-back" data-back-to="2">&larr; Pick a different time</button>
+        <h2 class="step-title">Your Info</h2>
+        <div class="selected-slot-banner" id="selected-slot-banner"></div>
+        <p id="form-error" class="error-banner hidden"></p>
+        <form class="booking-form" id="booking-form">
+          <label>Your name
+            <input type="text" id="f-customer-name" required />
+          </label>
+          <label>Phone number
+            <input type="tel" id="f-customer-phone" required />
+          </label>
+          <label>Email (optional)
+            <input type="email" id="f-customer-email" />
+          </label>
+          <label id="field-guest-count-wrap">Estimated guest count
+            <input type="number" id="f-guest-count" min="1" required />
+          </label>
+
+          <div class="conditional-fields" id="fields-birthday">
+            <label>Birthday child's name
+              <input type="text" id="f-child-name" />
+            </label>
+            <label>Birthday child's age (turning)
+              <input type="number" id="f-child-age" min="0" />
+            </label>
+          </div>
+
+          <div class="conditional-fields" id="fields-private-birthday">
+            <label>Extra pizzas ($12.50 each)
+              <input type="number" id="f-pizza-qty" min="0" value="0" />
+            </label>
+            <label>Extra soda pitchers ($5 each)
+              <input type="number" id="f-soda-qty" min="0" value="0" />
+            </label>
+            <label style="flex-direction: row; align-items: center; gap: 0.5rem">
+              <input type="checkbox" id="f-extension" />
+              Add 30 minutes (+$75)
+            </label>
+          </div>
+
+          <div class="conditional-fields" id="fields-rental">
+            <label class="full">Guest count tier
+              <select id="f-rental-tier"></select>
+            </label>
+          </div>
+
+          <div class="conditional-fields" id="fields-fundraiser">
+            <label>Organization name
+              <input type="text" id="f-org-name" />
+            </label>
+            <label>Planned admission price you'll charge ($)
+              <input type="number" id="f-admission-price" min="0" />
+            </label>
+            <p class="full" style="font-size: 0.8rem; color: var(--text-muted)">
+              We'll follow up to confirm the check-recipient details for your funds raised.
+            </p>
+          </div>
+
+          <label class="full">Anything else we should know? (optional)
+            <textarea id="f-special-requests" rows="2"></textarea>
+          </label>
+
+          <div class="full" style="text-align: center">
+            <button class="btn" type="submit" id="submit-btn">Submit Request</button>
+          </div>
+        </form>
+      </section>
+
+      <!-- Step 4: Confirmation -->
+      <section class="booking-step" id="step-4" data-step="4">
+        <div class="confirmation-box" id="confirmation-box"></div>
+      </section>
+    </main>
+
+    <script>
+      // Update this once the booking backend (ashlandskateland-booking-api) is
+      // deployed to its real domain.
+      var API_BASE_URL = "https://api.ashlandskateland.com";
+
+      var PACKAGE_LABELS = {
+        public_birthday: "Public Birthday Party",
+        private_birthday: "Private Birthday Party",
+        private_facility_rental: "Private Facility Rental",
+        private_fundraiser: "Private Fundraiser",
+      };
+
+      var state = {
+        packageType: null,
+        category: null,
+        viewYear: new Date().getFullYear(),
+        viewMonth: new Date().getMonth(),
+        selectedDate: null,
+        selectedStart: null,
+        selectedEnd: null,
+        rentalTiers: [],
+      };
+
+      function pad(n) {
+        return String(n).padStart(2, "0");
+      }
+      function dateKey(y, m, d) {
+        return y + "-" + pad(m + 1) + "-" + pad(d);
+      }
+      function formatTime12(hhmm) {
+        var parts = hhmm.split(":").map(Number);
+        var h = parts[0];
+        var m = parts[1];
+        var ampm = h >= 12 ? "PM" : "AM";
+        h = h % 12;
+        if (h === 0) h = 12;
+        return h + ":" + pad(m) + " " + ampm;
+      }
+
+      function showStep(n) {
+        document.querySelectorAll(".booking-step").forEach(function (el) {
+          el.classList.toggle("active", el.dataset.step === String(n));
+        });
+        document.querySelectorAll("[data-step-pill]").forEach(function (el) {
+          var pillStep = Number(el.dataset.stepPill);
+          el.classList.toggle("active", pillStep === n);
+          el.classList.toggle("done", pillStep < n);
+        });
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+
+      document.querySelectorAll("[data-back-to]").forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          showStep(Number(btn.dataset.backTo));
+        });
+      });
+
+      // ---------- Step 1 ----------
+      document.querySelectorAll("[data-package]").forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          state.packageType = btn.dataset.package;
+          state.category = btn.dataset.category;
+          state.selectedDate = null;
+          state.selectedStart = null;
+          state.selectedEnd = null;
+          document.getElementById("step-2-subtitle").textContent =
+            state.category === "public"
+              ? "Showing upcoming Public Skate sessions — your party can be booked during any of these."
+              : "Showing upcoming private party slots — only one booking is allowed per slot.";
+          document.getElementById("step-2-error").classList.add("hidden");
+          renderCalendarMonth();
+          showStep(2);
+        });
+      });
+
+      // ---------- Step 2: live slot picker ----------
+      document.getElementById("prev-month").addEventListener("click", function () {
+        state.viewMonth -= 1;
+        if (state.viewMonth < 0) {
+          state.viewMonth = 11;
+          state.viewYear -= 1;
+        }
+        renderCalendarMonth();
+      });
+      document.getElementById("next-month").addEventListener("click", function () {
+        state.viewMonth += 1;
+        if (state.viewMonth > 11) {
+          state.viewMonth = 0;
+          state.viewYear += 1;
+        }
+        renderCalendarMonth();
+      });
+
+      function monthRange(year, month) {
+        var start = dateKey(year, month, 1);
+        var lastDay = new Date(year, month + 1, 0).getDate();
+        var end = dateKey(year, month, lastDay);
+        return { start: start, end: end, lastDay: lastDay };
+      }
+
+      function renderCalendarMonth() {
+        var grid = document.getElementById("calendar-grid");
+        var monthLabel = new Date(state.viewYear, state.viewMonth, 1).toLocaleDateString("en-US", {
+          month: "long",
+          year: "numeric",
+        });
+        document.getElementById("month-label").textContent = monthLabel;
+        grid.innerHTML = "<div style=\"grid-column:1/-1; padding:1rem; text-align:center; color:var(--text-muted)\">Loading availability…</div>";
+
+        var range = monthRange(state.viewYear, state.viewMonth);
+        fetch(API_BASE_URL + "/api/availability?start=" + range.start + "&end=" + range.end)
+          .then(function (res) {
+            if (!res.ok) throw new Error("Could not load availability");
+            return res.json();
+          })
+          .then(function (data) {
+            renderCalendarGrid(data.availability || [], range.lastDay);
+          })
+          .catch(function () {
+            grid.innerHTML =
+              "<div style=\"grid-column:1/-1; padding:1rem; text-align:center; color:var(--text-muted)\">" +
+              "Couldn't load availability right now. Please call or text us at " +
+              "<a href=\"tel:8047986550\" style=\"color:var(--neon-cyan)\">804-798-6550</a> instead.</div>";
+          });
+      }
+
+      function renderCalendarGrid(availability, lastDay) {
+        var byDate = {};
+        availability.forEach(function (s) {
+          if (s.category !== state.category) return;
+          (byDate[s.date] = byDate[s.date] || []).push(s);
+        });
+
+        var grid = document.getElementById("calendar-grid");
+        grid.innerHTML = "";
+        ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].forEach(function (d) {
+          var el = document.createElement("div");
+          el.className = "calendar-dow";
+          el.textContent = d;
+          grid.appendChild(el);
+        });
+
+        var firstDow = new Date(state.viewYear, state.viewMonth, 1).getDay();
+        for (var i = 0; i < firstDow; i++) {
+          var empty = document.createElement("div");
+          empty.className = "calendar-day empty";
+          grid.appendChild(empty);
+        }
+
+        var today = new Date();
+        today.setHours(0, 0, 0, 0);
+
+        for (var day = 1; day <= lastDay; day++) {
+          var key = dateKey(state.viewYear, state.viewMonth, day);
+          var cellDate = new Date(state.viewYear, state.viewMonth, day);
+          var cell = document.createElement("div");
+          cell.className = "calendar-day" + (cellDate < today ? " past" : "");
+
+          var numberEl = document.createElement("div");
+          numberEl.className = "day-number";
+          numberEl.textContent = String(day);
+          cell.appendChild(numberEl);
+
+          var sessions = byDate[key] || [];
+          sessions.forEach(function (s) {
+            var btn = document.createElement("button");
+            btn.type = "button";
+            btn.className = "slot-btn" + (s.full ? " full" : "");
+            btn.textContent = formatTime12(s.start) + (s.full ? " (Booked)" : "");
+            btn.disabled = s.full || cellDate < today;
+            btn.addEventListener("click", function () {
+              state.selectedDate = s.date;
+              state.selectedStart = s.start;
+              state.selectedEnd = s.end;
+              prepareStep3();
+              showStep(3);
+            });
+            cell.appendChild(btn);
+          });
+
+          grid.appendChild(cell);
+        }
+      }
+
+      // ---------- Step 3: form ----------
+      function prepareStep3() {
+        document.getElementById("form-error").classList.add("hidden");
+        document.getElementById("selected-slot-banner").innerHTML =
+          "<strong>" + PACKAGE_LABELS[state.packageType] + "</strong> on <strong>" +
+          new Date(state.selectedDate + "T00:00:00").toLocaleDateString("en-US", {
+            weekday: "long", month: "long", day: "numeric",
+          }) +
+          "</strong>, " + formatTime12(state.selectedStart) + "–" + formatTime12(state.selectedEnd);
+
+        var isBirthday = state.packageType === "public_birthday" || state.packageType === "private_birthday";
+        document.getElementById("fields-birthday").classList.toggle("hidden", !isBirthday);
+        document.getElementById("fields-private-birthday").classList.toggle(
+          "hidden",
+          state.packageType !== "private_birthday"
+        );
+        document.getElementById("fields-rental").classList.toggle(
+          "hidden",
+          state.packageType !== "private_facility_rental"
+        );
+        document.getElementById("fields-fundraiser").classList.toggle(
+          "hidden",
+          state.packageType !== "private_fundraiser"
+        );
+
+        // Facility rental's guest count comes from the tier dropdown instead —
+        // hide the generic field so it isn't a redundant/confusing required input.
+        var isRental = state.packageType === "private_facility_rental";
+        document.getElementById("field-guest-count-wrap").classList.toggle("hidden", isRental);
+        document.getElementById("f-guest-count").required = !isRental;
+      }
+
+      function loadRentalTiers() {
+        fetch(API_BASE_URL + "/api/pricing")
+          .then(function (res) { return res.json(); })
+          .then(function (data) {
+            state.rentalTiers = data.rentalTiers || [];
+            var select = document.getElementById("f-rental-tier");
+            select.innerHTML = state.rentalTiers
+              .map(function (t, i) {
+                return "<option value=\"" + i + "\">Up to " + t.guests + " guests — $" + t.rate + " (deposit $" + t.deposit + ")</option>";
+              })
+              .join("");
+          })
+          .catch(function () {
+            /* Rental tier dropdown just stays empty; staff will follow up by phone regardless. */
+          });
+      }
+      loadRentalTiers();
+
+      document.getElementById("booking-form").addEventListener("submit", function (e) {
+        e.preventDefault();
+        var errorEl = document.getElementById("form-error");
+        errorEl.classList.add("hidden");
+
+        var body = {
+          packageType: state.packageType,
+          date: state.selectedDate,
+          startTime: state.selectedStart,
+          category: state.category,
+          customerName: document.getElementById("f-customer-name").value,
+          customerPhone: document.getElementById("f-customer-phone").value,
+          customerEmail: document.getElementById("f-customer-email").value || undefined,
+          guestCount: Number(document.getElementById("f-guest-count").value),
+          specialRequests: document.getElementById("f-special-requests").value || undefined,
+        };
+
+        if (state.packageType === "public_birthday" || state.packageType === "private_birthday") {
+          body.birthdayChildName = document.getElementById("f-child-name").value || undefined;
+          var age = document.getElementById("f-child-age").value;
+          body.birthdayChildAge = age ? Number(age) : undefined;
+        }
+        if (state.packageType === "private_birthday") {
+          body.pizzaQty = Number(document.getElementById("f-pizza-qty").value || 0);
+          body.sodaQty = Number(document.getElementById("f-soda-qty").value || 0);
+          body.extension30Min = document.getElementById("f-extension").checked;
+        }
+        if (state.packageType === "private_facility_rental") {
+          var tierIndex = Number(document.getElementById("f-rental-tier").value || 0);
+          body.rentalTierIndex = tierIndex;
+          if (state.rentalTiers[tierIndex]) {
+            body.guestCount = state.rentalTiers[tierIndex].guests;
+          }
+        }
+        if (state.packageType === "private_fundraiser") {
+          body.organizationName = document.getElementById("f-org-name").value || undefined;
+          var price = document.getElementById("f-admission-price").value;
+          body.fundraiserAdmissionPrice = price ? Number(price) : undefined;
+        }
+
+        var submitBtn = document.getElementById("submit-btn");
+        submitBtn.disabled = true;
+        submitBtn.textContent = "Submitting…";
+
+        fetch(API_BASE_URL + "/api/bookings", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(body),
+        })
+          .then(function (res) {
+            return res.json().then(function (data) { return { status: res.status, data: data }; });
+          })
+          .then(function (result) {
+            if (result.status === 201) {
+              showConfirmation(result.data.booking);
+              showStep(4);
+            } else if (result.status === 409 && result.data.error === "slot_full") {
+              // This error must be shown on step 2, not step 3 — #form-error lives
+              // inside the step-3 section, which is about to become display:none,
+              // so setting it here would silently hide the message from the user.
+              var step2ErrorEl = document.getElementById("step-2-error");
+              step2ErrorEl.textContent =
+                "Sorry — someone else just grabbed that slot. Please pick another date/time.";
+              step2ErrorEl.classList.remove("hidden");
+              renderCalendarMonth();
+              showStep(2);
+            } else {
+              errorEl.textContent =
+                "Something went wrong submitting your request. Please call or text us at 804-798-6550 and we'll get you booked.";
+              errorEl.classList.remove("hidden");
+            }
+          })
+          .catch(function () {
+            errorEl.textContent =
+              "Something went wrong submitting your request. Please call or text us at 804-798-6550 and we'll get you booked.";
+            errorEl.classList.remove("hidden");
+          })
+          .finally(function () {
+            submitBtn.disabled = false;
+            submitBtn.textContent = "Submit Request";
+          });
+      });
+
+      // ---------- Step 4: confirmation ----------
+      function showConfirmation(booking) {
+        var box = document.getElementById("confirmation-box");
+        if (booking.flagged_for_review) {
+          box.className = "confirmation-box flagged";
+          box.innerHTML =
+            "<h3>Thanks! We'll follow up shortly.</h3>" +
+            "<p>Your " + PACKAGE_LABELS[booking.package_type].toLowerCase() + " request needs a quick look from our " +
+            "staff before we can send an invoice — we'll call or text you at the number you provided.</p>" +
+            "<p style=\"margin-top:1rem\">Questions in the meantime? Call or text <a href=\"tel:8047986550\" style=\"color:var(--neon-pink)\">804-798-6550</a>.</p>";
+        } else {
+          box.className = "confirmation-box";
+          box.innerHTML =
+            "<h3>You're almost booked!</h3>" +
+            "<p>We're sending an invoice to the email/phone you provided now. A 50% deposit secures your spot — " +
+            "the rest is due on the day of your event.</p>" +
+            "<p style=\"margin-top:1rem\">Questions? Call or text <a href=\"tel:8047986550\" style=\"color:var(--neon-cyan)\">804-798-6550</a>.</p>";
+        }
+      }
+
+      showStep(1);
+    </script>
+  </body>
+</html>

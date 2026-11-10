@@ -14,6 +14,7 @@ There's no build or dev server tooling configured. Open the HTML files directly 
 
 - `index.html` — home page: hero, public skate schedule, party packages, private rentals, fundraiser calculator, lessons, reviews, contact/map.
 - `calendar/index.html` — data-driven monthly skate calendar rendered client-side from a `CALENDAR`/`WEEKLY_SCHEDULE`/`OVERRIDES` config in its inline `<script>` (see below). Includes a print stylesheet and a "Print / Save as PDF" button so staff can produce a printable monthly calendar without any build step.
+- `book/index.html` — the party booking widget (package selection → live availability → form → submit). Unlike every other page in this repo, it's **not self-contained** — it calls a separate backend (`ashlandskateland-booking-api`, its own repo) over `fetch()` for live availability, rental-tier pricing, and booking submission. The backend's base URL is the `API_BASE_URL` constant at the top of this page's inline `<script>`; update it there if the backend's deployment domain ever changes. If the backend is unreachable, the page degrades gracefully to a "call or text us" message rather than breaking.
 - `menu/index.html` — snack bar menu with an allergen legend.
 - `menu-left/index.html` / `menu-right/index.html` — the same snack bar menu split across two side-by-side 55" TVs for in-store casting (no nav, larger text, single-screen layout with no scrolling). Left TV shows Food + Allergen Guide; right TV shows Drinks + Ice Cream.
 - `assets/skate-rva-logo.svg` — shared logo referenced via relative paths (`assets/...` from root, `../assets/...` from subpages).
@@ -29,6 +30,7 @@ Navigation between pages uses root-relative paths (`/`, `/calendar/`, `/menu/`),
 - **Private Fundraiser** formula (`0.8 * (guests * price - 375)`) is described in the on-page copy and implemented in `updateFundraiserSliders()` — if the deal terms change, update the paragraph text and the formula together.
 - **`calendar/index.html`'s `WEEKLY_SCHEDULE`** array is a third copy of the same recurring public-skate hours (with per-session labels added for display), separate from `index.html`'s `SCHEDULE`/table — keep all three in sync when hours change.
 - **`menu/index.html`'s snack bar items/prices/flavors/allergen icons** are duplicated into `menu-left/index.html` (Food + Allergen Guide) and `menu-right/index.html` (Drinks + Ice Cream) for TV casting — update all three whenever menu items, prices, or flavors change.
+- **`book/index.html`'s Step 1 package cards** (price + short description per package) are a fourth copy of the same package details described in `index.html`'s `#parties`/`#private`/`#fundraiser` sections — keep the wording/prices consistent when they change. Actual availability and pricing math for the booking flow itself come live from the backend API, not from anything hardcoded in this repo, so only the *descriptive copy* on the cards needs manual syncing here.
 
 ## Updating the monthly calendar
 
@@ -43,5 +45,5 @@ The page builds the grid in JS (`renderCalendar()`), so there's no PDF to regene
 ## Conventions
 
 - Dark neon theme via CSS custom properties defined per-page in `:root` (`--bg-black-magic`, `--neon-pink`, `--neon-cyan`, etc.). `calendar/index.html` and `menu/index.html` redefine a subset of the same variable names rather than sharing a stylesheet — keep values consistent across pages if the palette changes.
-- Booking CTAs are `sms:` links with a prefilled body text (e.g. `sms:8047986550?&body=...`), not a form — there's no backend.
+- Booking CTAs are `sms:` links with a prefilled body text (e.g. `sms:8047986550?&body=...`), not a form — there's no backend wired to this site's own CTAs yet. `/book/` (the booking widget, backed by a separate repo's API) exists and is live, but deliberately **not yet linked from anywhere on the public site** — it's in a direct-link-only beta with a handful of customers before the home page's CTAs get switched over to point at it. See the `party-booking-automation` branch for the (not-yet-merged) CTA wiring that flips this on.
 - All external links (Google/Facebook reviews, Google Forms for party/team booking) use `target="_blank" rel="noopener"`.

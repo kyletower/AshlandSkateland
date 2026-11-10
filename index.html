@@ -468,11 +468,31 @@
     .section-action {
       display: flex;
       justify-content: flex-end;
+      align-items: center;
+      gap: 1rem;
       margin-top: 1rem;
+      flex-wrap: wrap;
     }
 
     .section-action .btn {
       min-width: 140px;
+    }
+
+    .btn-fallback {
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      text-decoration: underline;
+    }
+
+    .btn-fallback:hover {
+      color: var(--neon-cyan);
+    }
+
+    .card-actions {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.4rem;
     }
 
     @media (max-width: 600px) {
@@ -508,7 +528,7 @@
         <a href="#classes">Classes</a>
         <a href="#reviews">Reviews</a>
         <a href="#contact">Contact</a>
-        <a class="nav-cta" href="https://forms.gle/XhmiqauXtZekBZHA9" target="_blank" rel="noopener">Book a Party!</a>
+        <a class="nav-cta" href="/book/">Book a Party!</a>
         <a class="nav-cta" href="https://forms.gle/VzsfRVDkr8UJzkeJA" target="_blank" rel="noopener">Join Our Team</a>
         <a class="nav-cta" href="https://forms.gle/NPC7EpoC5bDFo63o7" target="_blank" rel="noopener">Roller Hockey</a>
       </nav>
@@ -634,8 +654,11 @@
               </li>
             </ul>
           </div>
-          <a href="sms:8047986550?&body=Hi%21%20I%27d%20like%20to%20book%20a%20Public%20Party" class="btn">Text to
-            Book</a>
+          <div class="card-actions">
+            <a href="/book/" class="btn">Book Online</a>
+            <a href="sms:8047986550?&body=Hi%21%20I%27d%20like%20to%20book%20a%20Public%20Party" class="btn-fallback">or
+              text to book</a>
+          </div>
         </div>
 
         <div class="card">
@@ -671,8 +694,11 @@
               <li>Each additional guest beyond 10: $17</li>
             </ul>
           </div>
-          <a href="sms:8047986550?&body=Hi%21%20I%27d%20like%20to%20book%20a%20Private%20Party" class="btn">Text to
-            Book</a>
+          <div class="card-actions">
+            <a href="/book/" class="btn">Book Online</a>
+            <a href="sms:8047986550?&body=Hi%21%20I%27d%20like%20to%20book%20a%20Private%20Party" class="btn-fallback">or
+              text to book</a>
+          </div>
         </div>
       </div>
     </section>
@@ -703,8 +729,9 @@
         </div>
       </div>
       <div class="section-action">
-        <a href="sms:8047986550?&body=Hi%21%20I%27d%20like%20to%20book%20a%20Building%20Rental" class="btn">Text to
-          Book</a>
+        <a href="sms:8047986550?&body=Hi%21%20I%27d%20like%20to%20book%20a%20Building%20Rental" class="btn-fallback">or
+          text to book</a>
+        <a href="/book/" class="btn">Book Online</a>
       </div>
     </section>
 
@@ -746,7 +773,9 @@
         </p>
       </div>
       <div class="section-action">
-        <a href="sms:8047986550?&body=Hi%21%20I%27d%20like%20to%20book%20a%20Fundraiser" class="btn">Text to Book</a>
+        <a href="sms:8047986550?&body=Hi%21%20I%27d%20like%20to%20book%20a%20Fundraiser" class="btn-fallback">or text
+          to book</a>
+        <a href="/book/" class="btn">Book Online</a>
       </div>
     </section>
 
