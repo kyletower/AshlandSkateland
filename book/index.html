@@ -245,10 +245,22 @@
       .calendar-day.past {
         opacity: 0.4;
       }
+      .calendar-day.closed {
+        background: rgba(214, 51, 108, 0.08);
+      }
       .day-number {
         font-weight: bold;
         color: var(--text-muted);
         font-size: 0.85rem;
+      }
+      .day-closed {
+        text-align: center;
+        margin: auto 0;
+      }
+      .closed-reason {
+        font-weight: bold;
+        color: var(--neon-pink);
+        font-size: 0.78rem;
       }
       .slot-btn {
         display: block;
@@ -271,6 +283,13 @@
         color: var(--text-muted);
         cursor: not-allowed;
         text-decoration: line-through;
+      }
+      .slot-btn .slot-label {
+        display: block;
+        font-size: 0.65rem;
+        text-transform: uppercase;
+        letter-spacing: 0.3px;
+        opacity: 0.85;
       }
       @media (max-width: 700px) {
         .calendar-grid {
@@ -673,7 +692,12 @@
 
       function renderCalendarGrid(availability, lastDay) {
         var byDate = {};
+        var closedByDate = {};
         availability.forEach(function (s) {
+          if (s.closed) {
+            closedByDate[s.date] = s;
+            return;
+          }
           if (s.category !== state.category) return;
           (byDate[s.date] = byDate[s.date] || []).push(s);
         });
@@ -700,21 +724,39 @@
         for (var day = 1; day <= lastDay; day++) {
           var key = dateKey(state.viewYear, state.viewMonth, day);
           var cellDate = new Date(state.viewYear, state.viewMonth, day);
+          var closedInfo = closedByDate[key];
           var cell = document.createElement("div");
-          cell.className = "calendar-day" + (cellDate < today ? " past" : "");
+          cell.className = "calendar-day" + (cellDate < today ? " past" : "") + (closedInfo ? " closed" : "");
 
           var numberEl = document.createElement("div");
           numberEl.className = "day-number";
           numberEl.textContent = String(day);
           cell.appendChild(numberEl);
 
+          if (closedInfo) {
+            var closedBox = document.createElement("div");
+            closedBox.className = "day-closed";
+            var reasonEl = document.createElement("div");
+            reasonEl.className = "closed-reason";
+            reasonEl.textContent = "Closed!" + (closedInfo.closedReason ? " (" + closedInfo.closedReason + ")" : "");
+            closedBox.appendChild(reasonEl);
+            cell.appendChild(closedBox);
+            grid.appendChild(cell);
+            continue;
+          }
+
           var sessions = byDate[key] || [];
           sessions.forEach(function (s) {
             var btn = document.createElement("button");
             btn.type = "button";
             btn.className = "slot-btn" + (s.full ? " full" : "");
-            btn.textContent = formatTime12(s.start) + (s.full ? " (Booked)" : "");
             btn.disabled = s.full || cellDate < today;
+            var timeText = formatTime12(s.start) + (s.full ? " (Booked)" : "");
+            if (s.label) {
+              btn.innerHTML = timeText + '<span class="slot-label">' + s.label + "</span>";
+            } else {
+              btn.textContent = timeText;
+            }
             btn.addEventListener("click", function () {
               state.selectedDate = s.date;
               state.selectedStart = s.start;
