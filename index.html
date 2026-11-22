@@ -447,6 +447,10 @@
       vertical-align: middle;
     }
 
+    tr.thanksgiving-row>td {
+      background-color: rgba(214, 51, 108, 0.18);
+    }
+
     /* Buttons */
     .btn {
       display: inline-block;
@@ -590,12 +594,27 @@
             <td>Public Skate (2:00pm – 4:30pm)</td>
             <td>$9</td>
           </tr>
+          <tr data-day="1">
+            <td rowspan="2" class="day-label"><strong>Monday</strong></td>
+            <td>Public Skate (12:30pm – 2:30pm)</td>
+            <td>$9</td>
+          </tr>
           <tr class="day-end" data-day="1">
-            <td class="day-label"><strong>Monday</strong></td>
             <td>Adult Skate, 18+ Only (7:30pm – 10:00pm)</td>
             <td>$9</td>
           </tr>
+          <tr class="day-end" data-day="2">
+            <td class="day-label"><strong>Tuesday</strong></td>
+            <td>Public Skate (12:30pm – 2:30pm)</td>
+            <td>$9</td>
+          </tr>
+          <tr class="day-end" data-day="3">
+            <td class="day-label"><strong>Wednesday</strong></td>
+            <td>Public Skate (12:30pm – 2:30pm)</td>
+            <td>$9</td>
+          </tr>
 
+          <!-- Thursday Public Skate schedule temporarily replaced for Thanksgiving:
           <tr data-day="4">
             <td rowspan="2" class="day-label"><strong>Thursday</strong></td>
             <td>Public Skate (10:00am – 12:00pm)</td>
@@ -605,8 +624,18 @@
             <td>Christian Music Skate (7:00pm – 9:00pm)</td>
             <td>$7</td>
           </tr>
+          -->
+          <tr class="day-end thanksgiving-row" data-day="4">
+            <td class="day-label"><strong>Thursday</strong></td>
+            <td>Closed for Thanksgiving!</td>
+            <td>—</td>
+          </tr>
+          <tr data-day="5">
+            <td rowspan="2" class="day-label"><strong>Friday</strong></td>
+            <td>Public Skate (12:30pm – 2:30pm)</td>
+            <td>$5</td>
+          </tr>
           <tr class="day-end" data-day="5">
-            <td class="day-label"><strong>Friday</strong></td>
             <td>Public Skate (8:00pm – 10:30pm)</td>
             <td>$10</td>
           </tr>
@@ -897,14 +926,23 @@
     // Mirrors the Public Skate Schedule table above — update both if hours change.
     var SCHEDULE = [
       [{start: "14:00", end: "16:30", price: 9}], // Sunday — Public Skate
-      [{start: "19:30", end: "22:00", price: 9}], // Monday — Adult Skate (18+)
-      [], // Tuesday — no public sessions
-      [], // Wednesday — no public sessions
+      [
+        {start: "12:30", end: "14:30", price: 9},
+        {start: "19:30", end: "22:00", price: 9},
+      ], // Monday — Public Skate, Adult Skate (18+)
+      [{start: "12:30", end: "14:30", price: 9}], // Tuesday — Public Skate
+      [{start: "12:30", end: "14:30", price: 9}], // Wednesday — Public Skate
+      [], // Thursday — Closed for Thanksgiving!
+      /*
       [
         {start: "10:00", end: "12:00", price: 7},
         {start: "19:00", end: "21:00", price: 7},
       ], // Thursday — Public Skate, Christian Music Skate
-      [{start: "20:00", end: "22:30", price: 10}], // Friday — Public Skate
+      */
+      [
+        {start: "12:30", end: "14:30", price: 5},
+        {start: "20:00", end: "22:30", price: 10},
+      ], // Friday — Public Skate
       [
         {start: "10:30", end: "12:30", price: 8},
         {start: "14:00", end: "16:30", price: 9},
